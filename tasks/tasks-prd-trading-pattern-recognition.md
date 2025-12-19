@@ -36,16 +36,16 @@ Based on PRD: `prd-trading-pattern-recognition.md`
 - `tests/test_ingestion/` - Tests for ingestion module (created)
 
 ### Metric Module (Algorithm Bank)
-- `chartradar/metrics/__init__.py` - Metrics module initialization
-- `chartradar/metrics/base.py` - Base Algorithm abstract class
-- `chartradar/metrics/registry.py` - Algorithm registry and discovery system
-- `chartradar/metrics/executor.py` - Algorithm execution engine
-- `chartradar/metrics/algorithms/__init__.py` - Algorithm implementations directory
-- `chartradar/metrics/algorithms/rule_based/__init__.py` - Rule-based algorithms
-- `chartradar/metrics/algorithms/rule_based/wedge_detector.py` - Wedge pattern detection algorithm
-- `chartradar/metrics/algorithms/rule_based/triangle_detector.py` - Triangle pattern detection algorithm
-- `chartradar/metrics/algorithms/ml/__init__.py` - ML-based algorithms (infrastructure)
-- `tests/test_metrics/` - Tests for metrics module
+- `chartradar/metrics/__init__.py` - Metrics module initialization (created)
+- `chartradar/metrics/base.py` - Base Algorithm abstract class (created)
+- `chartradar/metrics/registry.py` - Algorithm registry and discovery system (created)
+- `chartradar/metrics/executor.py` - Algorithm execution engine (created)
+- `chartradar/metrics/algorithms/__init__.py` - Algorithm implementations directory (created)
+- `chartradar/metrics/algorithms/rule_based/__init__.py` - Rule-based algorithms (created)
+- `chartradar/metrics/algorithms/rule_based/wedge_detector.py` - Wedge pattern detection algorithm (created)
+- `chartradar/metrics/algorithms/rule_based/triangle_detector.py` - Triangle pattern detection algorithm (created)
+- `chartradar/metrics/algorithms/ml/__init__.py` - ML-based algorithms (infrastructure) (created)
+- `tests/test_metrics/` - Tests for metrics module (created)
 
 ### Data Fusion Module
 - `chartradar/fusion/__init__.py` - Fusion module initialization
@@ -203,43 +203,43 @@ Based on PRD: `prd-trading-pattern-recognition.md`
     - [x] 3.10.4 Test each data source implementation
     - [x] 3.10.5 Test caching functionality
 
-- [ ] 4.0 Metric Module (Algorithm Bank) with Plugin System
-  - [ ] 4.1 Implement `chartradar/metrics/base.py` with `Algorithm` abstract base class:
-    - [ ] 4.1.1 Define `process(data)` method signature
-    - [ ] 4.1.2 Define `get_metadata()` method (name, version, description, parameters)
-    - [ ] 4.1.3 Define `get_requirements()` method (data format, minimum data points)
-    - [ ] 4.1.4 Define standard output format (AlgorithmResult model)
-  - [ ] 4.2 Implement `chartradar/metrics/registry.py` for algorithm discovery and registration:
-    - [ ] 4.2.1 Algorithm registration system (register decorator or explicit registration)
-    - [ ] 4.2.2 Algorithm discovery via directory scanning or entry points
-    - [ ] 4.2.3 Algorithm lookup by name
-    - [ ] 4.2.4 Support for algorithm versioning
-    - [ ] 4.2.5 Metadata storage for registered algorithms
-  - [ ] 4.3 Implement `chartradar/metrics/executor.py` for algorithm execution:
-    - [ ] 4.3.1 Load algorithms from registry based on YAML config
-    - [ ] 4.3.2 Instantiate algorithms with parameters from config
-    - [ ] 4.3.3 Execute algorithms on data (support parallel execution)
-    - [ ] 4.3.4 Handle algorithm errors gracefully (continue with other algorithms)
-    - [ ] 4.3.5 Collect and standardize algorithm outputs
-    - [ ] 4.3.6 Log execution metrics (timing, success/failure)
-  - [ ] 4.4 Create `chartradar/metrics/algorithms/rule_based/wedge_detector.py`:
-    - [ ] 4.4.1 Implement rising wedge detection algorithm
-    - [ ] 4.4.2 Implement falling wedge detection algorithm
-    - [ ] 4.4.3 Return pattern detection results with confidence scores
-    - [ ] 4.4.4 Include pattern boundaries and characteristics
-  - [ ] 4.5 Create `chartradar/metrics/algorithms/rule_based/triangle_detector.py`:
-    - [ ] 4.5.1 Implement rising triangle detection algorithm
-    - [ ] 4.5.2 Implement falling triangle detection algorithm
-    - [ ] 4.5.3 Return pattern detection results with confidence scores
-    - [ ] 4.5.4 Include pattern boundaries and characteristics
-  - [ ] 4.6 Create `chartradar/metrics/algorithms/ml/__init__.py` as placeholder for ML algorithm infrastructure:
-    - [ ] 4.6.1 Define base class for ML algorithms that extends Algorithm
-    - [ ] 4.6.2 Include model loading and inference methods
-  - [ ] 4.7 Write unit tests for metrics module in `tests/test_metrics/`:
-    - [ ] 4.7.1 Test algorithm base class
-    - [ ] 4.7.2 Test registry functionality
-    - [ ] 4.7.3 Test executor with mock algorithms
-    - [ ] 4.7.4 Test wedge and triangle detectors with sample data
+- [x] 4.0 Metric Module (Algorithm Bank) with Plugin System
+  - [x] 4.1 Implement `chartradar/metrics/base.py` with `Algorithm` abstract base class:
+    - [x] 4.1.1 Define `process(data)` method signature
+    - [x] 4.1.2 Define `get_metadata()` method (name, version, description, parameters)
+    - [x] 4.1.3 Define `get_requirements()` method (data format, minimum data points)
+    - [x] 4.1.4 Define standard output format (AlgorithmResult model)
+  - [x] 4.2 Implement `chartradar/metrics/registry.py` for algorithm discovery and registration:
+    - [x] 4.2.1 Algorithm registration system (register decorator or explicit registration)
+    - [x] 4.2.2 Algorithm discovery via directory scanning or entry points
+    - [x] 4.2.3 Algorithm lookup by name
+    - [x] 4.2.4 Support for algorithm versioning
+    - [x] 4.2.5 Metadata storage for registered algorithms
+  - [x] 4.3 Implement `chartradar/metrics/executor.py` for algorithm execution:
+    - [x] 4.3.1 Load algorithms from registry based on YAML config
+    - [x] 4.3.2 Instantiate algorithms with parameters from config
+    - [x] 4.3.3 Execute algorithms on data (support parallel execution)
+    - [x] 4.3.4 Handle algorithm errors gracefully (continue with other algorithms)
+    - [x] 4.3.5 Collect and standardize algorithm outputs
+    - [x] 4.3.6 Log execution metrics (timing, success/failure)
+  - [x] 4.4 Create `chartradar/metrics/algorithms/rule_based/wedge_detector.py`:
+    - [x] 4.4.1 Implement rising wedge detection algorithm
+    - [x] 4.4.2 Implement falling wedge detection algorithm
+    - [x] 4.4.3 Return pattern detection results with confidence scores
+    - [x] 4.4.4 Include pattern boundaries and characteristics
+  - [x] 4.5 Create `chartradar/metrics/algorithms/rule_based/triangle_detector.py`:
+    - [x] 4.5.1 Implement rising triangle detection algorithm
+    - [x] 4.5.2 Implement falling triangle detection algorithm
+    - [x] 4.5.3 Return pattern detection results with confidence scores
+    - [x] 4.5.4 Include pattern boundaries and characteristics
+  - [x] 4.6 Create `chartradar/metrics/algorithms/ml/__init__.py` as placeholder for ML algorithm infrastructure:
+    - [x] 4.6.1 Define base class for ML algorithms that extends Algorithm
+    - [x] 4.6.2 Include model loading and inference methods
+  - [x] 4.7 Write unit tests for metrics module in `tests/test_metrics/`:
+    - [x] 4.7.1 Test algorithm base class
+    - [x] 4.7.2 Test registry functionality
+    - [x] 4.7.3 Test executor with mock algorithms
+    - [x] 4.7.4 Test wedge and triangle detectors with sample data
 
 - [ ] 5.0 Data Fusion Module
   - [ ] 5.1 Implement `chartradar/fusion/base.py` with `FusionStrategy` abstract base class:
