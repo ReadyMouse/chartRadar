@@ -1,0 +1,103 @@
+# Full ChartRadar Configuration
+# Comprehensive example with all options
+
+version: "1.0"
+name: "Full Trading Pattern Recognition Setup"
+
+# Data Sources
+data_sources:
+  - name: "freqtrade_data"
+    type: "freqtrade"
+    enabled: true
+    parameters:
+      data_dir: "${FREQTRADE_DATA_DIR:-./user_data/data}"
+      exchange: "kraken"
+      pair: "BTC/USDT"
+      timeframe: "1h"
+  
+  - name: "csv_backup"
+    type: "csv"
+    enabled: false
+    parameters:
+      path: "./backup_data.csv"
+      date_column: "timestamp"
+
+# Algorithms
+algorithms:
+  - name: "wedge_detector"
+    enabled: true
+    version: "1.0"
+    weight: 0.4
+    parameters:
+      min_confidence: 0.7
+      lookback_period: 50
+      pattern_types: ["rising_wedge", "falling_wedge"]
+  
+  - name: "triangle_detector"
+    enabled: true
+    version: "1.0"
+    weight: 0.6
+    parameters:
+      min_confidence: 0.65
+      lookback_period: 60
+      pattern_types: ["rising_triangle", "falling_triangle", "symmetrical_triangle"]
+
+# Fusion
+fusion:
+  strategy: "weighted_average"
+  enabled: true
+  parameters:
+    normalize_weights: true
+    min_contributors: 2
+
+# Display
+display:
+  enabled: true
+  visualization:
+    backend: "plotly"
+    show_confidence: true
+    show_patterns: true
+    theme: "dark"
+  export:
+    formats: ["json", "csv", "png", "svg"]
+    output_dir: "./output"
+    include_metadata: true
+
+# Training (optional)
+training:
+  enabled: false
+  data_split:
+    ratios:
+      train: 0.7
+      validation: 0.15
+      test: 0.15
+  hyperparameters:
+    learning_rate: 0.001
+    batch_size: 32
+    epochs: 100
+  checkpoint:
+    save_dir: "./models/checkpoints"
+    save_best: true
+  metrics:
+    log_file: "./logs/training_metrics.csv"
+  tracking:
+    enabled: true
+    experiment_name: "pattern_recognition_v1"
+
+# Labeling (optional)
+labeling:
+  enabled: false
+  storage:
+    type: "file"
+    path: "./labels"
+    format: "json"
+  tool:
+    interface: "cli"
+    auto_save: true
+
+# Metadata
+metadata:
+  author: "ChartRadar User"
+  description: "Full configuration example"
+  created: "2024-01-01"
+

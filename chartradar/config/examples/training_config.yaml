@@ -1,0 +1,84 @@
+# Training Configuration Example
+# Example for ML training setup
+
+version: "1.0"
+name: "ML Training Configuration"
+
+# Data Sources
+data_sources:
+  - name: "training_data"
+    type: "csv"
+    enabled: true
+    parameters:
+      path: "${TRAINING_DATA_PATH:-./data/training_data.csv}"
+      date_column: "timestamp"
+
+# Algorithms (ML-based)
+algorithms:
+  - name: "ml_pattern_classifier"
+    enabled: true
+    parameters:
+      model_type: "neural_network"
+      input_features: ["ohlcv", "indicators"]
+      output_classes: ["rising_wedge", "falling_wedge", "triangle", "none"]
+
+# Fusion
+fusion:
+  strategy: "stacking"
+  enabled: true
+  parameters:
+    meta_learner: "logistic_regression"
+    cv_folds: 5
+
+# Display
+display:
+  enabled: true
+  visualization:
+    backend: "matplotlib"
+  export:
+    formats: ["json"]
+
+# Training Configuration
+training:
+  enabled: true
+  data_split:
+    method: "time_series"
+    ratios:
+      train: 0.7
+      validation: 0.15
+      test: 0.15
+    shuffle: false  # Important for time series
+  hyperparameters:
+    learning_rate: 0.001
+    batch_size: 64
+    epochs: 200
+    early_stopping:
+      patience: 20
+      monitor: "val_loss"
+    optimizer: "adam"
+    loss: "categorical_crossentropy"
+  checkpoint:
+    save_dir: "./models/checkpoints"
+    save_best: true
+    save_frequency: 10  # Save every 10 epochs
+  metrics:
+    log_file: "./logs/training_metrics.csv"
+    log_frequency: 1  # Log every epoch
+    metrics: ["loss", "accuracy", "precision", "recall", "f1"]
+  tracking:
+    enabled: true
+    experiment_name: "ml_pattern_recognition"
+    track_hyperparameters: true
+    track_artifacts: true
+
+# Labeling (for training data)
+labeling:
+  enabled: true
+  storage:
+    type: "file"
+    path: "./labels"
+    format: "json"
+  tool:
+    interface: "cli"
+    auto_save: true
+

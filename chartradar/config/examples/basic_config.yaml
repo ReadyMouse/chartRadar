@@ -1,0 +1,39 @@
+# Basic ChartRadar Configuration
+# Minimal working example
+
+version: "1.0"
+name: "Basic Trading Pattern Recognition"
+
+# Data Sources
+data_sources:
+  - name: "csv_data"
+    type: "csv"
+    enabled: true
+    parameters:
+      path: "${DATA_PATH:-./data/ohlcv.csv}"
+      date_column: "timestamp"
+      format: "standard"
+
+# Algorithms
+algorithms:
+  - name: "wedge_detector"
+    enabled: true
+    parameters:
+      min_confidence: 0.6
+      lookback_period: 50
+
+# Fusion
+fusion:
+  strategy: "weighted_average"
+  enabled: true
+  parameters:
+    normalize_weights: true
+
+# Display
+display:
+  enabled: true
+  visualization:
+    backend: "matplotlib"
+  export:
+    formats: ["json", "csv"]
+

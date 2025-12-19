@@ -1,0 +1,381 @@
+# Task List: Modular Trading Analysis Framework
+
+Based on PRD: `prd-trading-pattern-recognition.md`
+
+## Relevant Files
+
+### Core Framework Files
+- `chartradar/__init__.py` - Package initialization and version
+- `chartradar/core/__init__.py` - Core module initialization
+- `chartradar/core/interfaces.py` - Abstract base classes for all module interfaces (DataSource, Algorithm, FusionStrategy, Display) (created)
+- `chartradar/core/exceptions.py` - Custom exception classes for the framework (created)
+- `chartradar/core/logger.py` - Logging configuration and utilities (created)
+- `chartradar/core/types.py` - Type definitions and data models (Pydantic models for standardized outputs) (created)
+- `chartradar/core/pipeline.py` - Main pipeline orchestrator that connects all modules (created)
+
+### Configuration System
+- `chartradar/config/__init__.py` - Config module initialization (created)
+- `chartradar/config/schema.py` - YAML configuration schema definition (Pydantic models) (created)
+- `chartradar/config/loader.py` - YAML configuration loader with validation (created)
+- `chartradar/config/validator.py` - Configuration validation logic (created)
+- `chartradar/config/examples/` - Example YAML configuration files (created)
+- `tests/test_config/` - Tests for configuration system (created)
+
+### Data Ingestion Module
+- `chartradar/ingestion/__init__.py` - Ingestion module initialization
+- `chartradar/ingestion/base.py` - Base DataSource abstract class
+- `chartradar/ingestion/batch.py` - Batch data source base implementation
+- `chartradar/ingestion/streaming.py` - Streaming data source base implementation
+- `chartradar/ingestion/sources/__init__.py` - Data source implementations
+- `chartradar/ingestion/sources/freqtrade.py` - Freqtrade data source implementation
+- `chartradar/ingestion/sources/csv.py` - CSV file data source
+- `chartradar/ingestion/sources/exchange.py` - Exchange API data source (using ccxt)
+- `chartradar/ingestion/normalizer.py` - Data normalization utilities (OHLCV standardization)
+- `chartradar/ingestion/validator.py` - Data quality validation
+- `chartradar/ingestion/cache.py` - Data caching implementation
+- `tests/test_ingestion/` - Tests for ingestion module
+
+### Metric Module (Algorithm Bank)
+- `chartradar/metrics/__init__.py` - Metrics module initialization
+- `chartradar/metrics/base.py` - Base Algorithm abstract class
+- `chartradar/metrics/registry.py` - Algorithm registry and discovery system
+- `chartradar/metrics/executor.py` - Algorithm execution engine
+- `chartradar/metrics/algorithms/__init__.py` - Algorithm implementations directory
+- `chartradar/metrics/algorithms/rule_based/__init__.py` - Rule-based algorithms
+- `chartradar/metrics/algorithms/rule_based/wedge_detector.py` - Wedge pattern detection algorithm
+- `chartradar/metrics/algorithms/rule_based/triangle_detector.py` - Triangle pattern detection algorithm
+- `chartradar/metrics/algorithms/ml/__init__.py` - ML-based algorithms (infrastructure)
+- `tests/test_metrics/` - Tests for metrics module
+
+### Data Fusion Module
+- `chartradar/fusion/__init__.py` - Fusion module initialization
+- `chartradar/fusion/base.py` - Base FusionStrategy abstract class
+- `chartradar/fusion/registry.py` - Fusion strategy registry
+- `chartradar/fusion/strategies/__init__.py` - Fusion strategy implementations
+- `chartradar/fusion/strategies/weighted_average.py` - Weighted average fusion
+- `chartradar/fusion/strategies/voting.py` - Majority voting fusion
+- `chartradar/fusion/strategies/stacking.py` - Stacking fusion strategy
+- `chartradar/fusion/executor.py` - Fusion execution engine
+- `tests/test_fusion/` - Tests for fusion module
+
+### Data Understanding and Display Module
+- `chartradar/display/__init__.py` - Display module initialization
+- `chartradar/display/base.py` - Base Display interface
+- `chartradar/display/visualizer.py` - Visualization functions (matplotlib/plotly)
+- `chartradar/display/exporter.py` - Export functionality (JSON, CSV, plots)
+- `chartradar/display/comparator.py` - Algorithm result comparison utilities
+- `chartradar/display/statistics.py` - Summary statistics generation
+- `tests/test_display/` - Tests for display module
+
+### Training and Testing Infrastructure
+- `chartradar/training/__init__.py` - Training module initialization
+- `chartradar/training/base.py` - Base training loop interface
+- `chartradar/training/loop.py` - Training loop implementation
+- `chartradar/training/evaluation.py` - Testing/evaluation loop
+- `chartradar/training/split.py` - Data splitting utilities (train/val/test, cross-validation)
+- `chartradar/training/checkpoint.py` - Model checkpointing and saving
+- `chartradar/training/metrics.py` - Training metrics logging
+- `chartradar/training/tracking.py` - Experiment tracking (basic, extensible)
+- `tests/test_training/` - Tests for training infrastructure
+
+### Data Labeling System
+- `chartradar/labeling/__init__.py` - Labeling module initialization
+- `chartradar/labeling/base.py` - Base labeling interface
+- `chartradar/labeling/storage.py` - Label storage format and I/O
+- `chartradar/labeling/validator.py` - Label validation and quality checks
+- `chartradar/labeling/exporter.py` - Label export for training
+- `chartradar/labeling/metadata.py` - Labeling metadata tracking
+- `chartradar/labeling/tool.py` - Labeling tool (CLI or API)
+- `tests/test_labeling/` - Tests for labeling system
+
+### Project Setup Files
+- `pyproject.toml` - Package setup and dependencies (created)
+- `requirements.txt` - Python dependencies (created)
+- `requirements-dev.txt` - Development dependencies (created)
+- `README.md` - Project documentation
+- `CHANGELOG.md` - Version history
+- `.gitignore` - Git ignore patterns
+- `pytest.ini` or `pyproject.toml` - Pytest configuration
+
+### Notes
+
+- Unit tests should be placed alongside the code files they are testing (e.g., `chartradar/ingestion/base.py` and `tests/test_ingestion/test_base.py`).
+- Use `pytest` to run tests. Running `pytest` without arguments executes all tests found by the pytest configuration.
+- Follow Python package structure conventions with `chartradar/` as the main package directory.
+- All modules should have `__init__.py` files for proper package structure.
+
+## Tasks
+
+- [ ] 1.0 Framework Foundation and Core Architecture
+  - [x] 1.1 Create project directory structure (`chartradar/` package with subdirectories for each module)
+  - [x] 1.2 Set up `setup.py` or `pyproject.toml` with package metadata and dependencies
+  - [x] 1.3 Create `requirements.txt` and `requirements-dev.txt` with core dependencies (pandas, numpy, PyYAML, pydantic, pytest)
+  - [x] 1.4 Implement `chartradar/core/interfaces.py` with abstract base classes:
+    - [x] 1.4.1 `DataSource` interface with `load_data()`, `stream_data()`, `get_metadata()` methods
+    - [x] 1.4.2 `Algorithm` interface with `process(data)`, `get_metadata()`, `get_requirements()` methods
+    - [x] 1.4.3 `FusionStrategy` interface with `fuse(results_list)`, `get_metadata()` methods
+    - [x] 1.4.4 `Display` interface with `visualize(results)`, `export(results, format)` methods
+  - [x] 1.5 Create `chartradar/core/exceptions.py` with custom exception classes (ConfigurationError, DataSourceError, AlgorithmError, etc.)
+  - [x] 1.6 Implement `chartradar/core/logger.py` with logging configuration (structured logging, log levels, file/console handlers)
+  - [x] 1.7 Create `chartradar/core/types.py` with Pydantic models for standardized data formats:
+    - [x] 1.7.1 `OHLCVData` model for normalized price data
+    - [x] 1.7.2 `AlgorithmResult` model for algorithm outputs
+    - [x] 1.7.3 `FusionResult` model for fused outputs
+    - [x] 1.7.4 `PatternDetection` model for pattern-specific results
+  - [x] 1.8 Implement `chartradar/core/pipeline.py` - main orchestrator that:
+    - [x] 1.8.1 Loads configuration from YAML
+    - [x] 1.8.2 Initializes data ingestion module
+    - [x] 1.8.3 Executes metric module algorithms
+    - [x] 1.8.4 Applies data fusion
+    - [x] 1.8.5 Handles display/export
+    - [x] 1.8.6 Manages error handling and logging throughout pipeline
+  - [x] 1.9 Create `.gitignore` file with Python-specific patterns
+  - [x] 1.10 Set up basic `README.md` with project overview and installation instructions
+
+- [x] 2.0 YAML Configuration System and Schema
+  - [x] 2.1 Design YAML configuration schema structure (data sources, algorithms, fusion, display sections)
+  - [x] 2.2 Implement `chartradar/config/schema.py` with Pydantic models for configuration validation:
+    - [x] 2.2.1 `DataSourceConfig` model
+    - [x] 2.2.2 `AlgorithmConfig` model
+    - [x] 2.2.3 `FusionConfig` model
+    - [x] 2.2.4 `DisplayConfig` model
+    - [x] 2.2.5 `FrameworkConfig` root model that combines all sections
+  - [x] 2.3 Implement `chartradar/config/loader.py` with YAML loading functionality:
+    - [x] 2.3.1 Load YAML file from path
+    - [x] 2.3.2 Support environment variable substitution in YAML values
+    - [x] 2.3.3 Support multiple config file merging
+    - [x] 2.3.4 Return validated configuration object
+  - [x] 2.4 Implement `chartradar/config/validator.py` with validation logic:
+    - [x] 2.4.1 Validate against Pydantic schema
+    - [x] 2.4.2 Check for required fields
+    - [x] 2.4.3 Validate algorithm names exist in registry
+    - [x] 2.4.4 Validate data source configurations
+    - [x] 2.4.5 Provide clear error messages for misconfigurations
+  - [x] 2.5 Create example YAML configuration files in `chartradar/config/examples/`:
+    - [x] 2.5.1 `basic_config.yaml` - minimal working example
+    - [x] 2.5.2 `full_config.yaml` - comprehensive example with all options
+    - [x] 2.5.3 `training_config.yaml` - example for ML training setup
+  - [x] 2.6 Write unit tests for configuration loading and validation in `tests/test_config/`
+
+- [ ] 3.0 Data Ingestion Module (Batch and Streaming)
+  - [ ] 3.1 Implement `chartradar/ingestion/base.py` with `DataSource` abstract base class:
+    - [ ] 3.1.1 Define abstract methods: `load_data()`, `stream_data()`, `get_metadata()`
+    - [ ] 3.1.2 Add common utility methods for data validation
+  - [ ] 3.2 Implement `chartradar/ingestion/batch.py` with `BatchDataSource` base class:
+    - [ ] 3.2.1 Implement chunked data loading
+    - [ ] 3.2.2 Support date range filtering
+    - [ ] 3.2.3 Handle pagination for large datasets
+  - [ ] 3.3 Implement `chartradar/ingestion/streaming.py` with `StreamingDataSource` base class:
+    - [ ] 3.3.1 Implement async/await pattern for streaming
+    - [ ] 3.3.2 Support callback-based data delivery
+    - [ ] 3.3.3 Handle connection management and reconnection
+  - [ ] 3.4 Implement `chartradar/ingestion/normalizer.py` for data standardization:
+    - [ ] 3.4.1 Convert various data formats to standard OHLCV DataFrame
+    - [ ] 3.4.2 Handle timezone normalization
+    - [ ] 3.4.3 Ensure consistent column naming and types
+  - [ ] 3.5 Implement `chartradar/ingestion/validator.py` for data quality checks:
+    - [ ] 3.5.1 Validate OHLCV data integrity (high >= low, etc.)
+    - [ ] 3.5.2 Check for missing data
+    - [ ] 3.5.3 Detect outliers and anomalies
+    - [ ] 3.5.4 Return validation reports
+  - [ ] 3.6 Implement `chartradar/ingestion/cache.py` for data caching:
+    - [ ] 3.6.1 File-based caching for batch data
+    - [ ] 3.6.2 Cache key generation based on data source and parameters
+    - [ ] 3.6.3 Cache invalidation strategies
+  - [ ] 3.7 Implement `chartradar/ingestion/sources/freqtrade.py`:
+    - [ ] 3.7.1 Connect to freqtrade data storage
+    - [ ] 3.7.2 Load historical OHLCV data
+    - [ ] 3.7.3 Support Kraken exchange data format
+    - [ ] 3.7.4 Implement both batch and streaming modes
+  - [ ] 3.8 Implement `chartradar/ingestion/sources/csv.py`:
+    - [ ] 3.8.1 Load OHLCV data from CSV files
+    - [ ] 3.8.2 Support various CSV formats
+    - [ ] 3.8.3 Handle large CSV files with chunking
+  - [ ] 3.9 Implement `chartradar/ingestion/sources/exchange.py`:
+    - [ ] 3.9.1 Use ccxt library for exchange API integration
+    - [ ] 3.9.2 Support multiple exchanges
+    - [ ] 3.9.3 Handle authentication and rate limiting
+    - [ ] 3.9.4 Implement streaming via WebSocket or polling
+  - [ ] 3.10 Write unit tests for ingestion module in `tests/test_ingestion/`:
+    - [ ] 3.10.1 Test base classes
+    - [ ] 3.10.2 Test normalizer
+    - [ ] 3.10.3 Test validator
+    - [ ] 3.10.4 Test each data source implementation
+    - [ ] 3.10.5 Test caching functionality
+
+- [ ] 4.0 Metric Module (Algorithm Bank) with Plugin System
+  - [ ] 4.1 Implement `chartradar/metrics/base.py` with `Algorithm` abstract base class:
+    - [ ] 4.1.1 Define `process(data)` method signature
+    - [ ] 4.1.2 Define `get_metadata()` method (name, version, description, parameters)
+    - [ ] 4.1.3 Define `get_requirements()` method (data format, minimum data points)
+    - [ ] 4.1.4 Define standard output format (AlgorithmResult model)
+  - [ ] 4.2 Implement `chartradar/metrics/registry.py` for algorithm discovery and registration:
+    - [ ] 4.2.1 Algorithm registration system (register decorator or explicit registration)
+    - [ ] 4.2.2 Algorithm discovery via directory scanning or entry points
+    - [ ] 4.2.3 Algorithm lookup by name
+    - [ ] 4.2.4 Support for algorithm versioning
+    - [ ] 4.2.5 Metadata storage for registered algorithms
+  - [ ] 4.3 Implement `chartradar/metrics/executor.py` for algorithm execution:
+    - [ ] 4.3.1 Load algorithms from registry based on YAML config
+    - [ ] 4.3.2 Instantiate algorithms with parameters from config
+    - [ ] 4.3.3 Execute algorithms on data (support parallel execution)
+    - [ ] 4.3.4 Handle algorithm errors gracefully (continue with other algorithms)
+    - [ ] 4.3.5 Collect and standardize algorithm outputs
+    - [ ] 4.3.6 Log execution metrics (timing, success/failure)
+  - [ ] 4.4 Create `chartradar/metrics/algorithms/rule_based/wedge_detector.py`:
+    - [ ] 4.4.1 Implement rising wedge detection algorithm
+    - [ ] 4.4.2 Implement falling wedge detection algorithm
+    - [ ] 4.4.3 Return pattern detection results with confidence scores
+    - [ ] 4.4.4 Include pattern boundaries and characteristics
+  - [ ] 4.5 Create `chartradar/metrics/algorithms/rule_based/triangle_detector.py`:
+    - [ ] 4.5.1 Implement rising triangle detection algorithm
+    - [ ] 4.5.2 Implement falling triangle detection algorithm
+    - [ ] 4.5.3 Return pattern detection results with confidence scores
+    - [ ] 4.5.4 Include pattern boundaries and characteristics
+  - [ ] 4.6 Create `chartradar/metrics/algorithms/ml/__init__.py` as placeholder for ML algorithm infrastructure:
+    - [ ] 4.6.1 Define base class for ML algorithms that extends Algorithm
+    - [ ] 4.6.2 Include model loading and inference methods
+  - [ ] 4.7 Write unit tests for metrics module in `tests/test_metrics/`:
+    - [ ] 4.7.1 Test algorithm base class
+    - [ ] 4.7.2 Test registry functionality
+    - [ ] 4.7.3 Test executor with mock algorithms
+    - [ ] 4.7.4 Test wedge and triangle detectors with sample data
+
+- [ ] 5.0 Data Fusion Module
+  - [ ] 5.1 Implement `chartradar/fusion/base.py` with `FusionStrategy` abstract base class:
+    - [ ] 5.1.1 Define `fuse(results_list)` method signature
+    - [ ] 5.1.2 Define `get_metadata()` method
+    - [ ] 5.1.3 Define standard input/output formats
+  - [ ] 5.2 Implement `chartradar/fusion/registry.py` for fusion strategy registration:
+    - [ ] 5.2.1 Strategy registration system
+    - [ ] 5.2.2 Strategy lookup by name
+    - [ ] 5.2.3 Metadata storage
+  - [ ] 5.3 Implement `chartradar/fusion/strategies/weighted_average.py`:
+    - [ ] 5.3.1 Combine algorithm outputs using weighted averaging
+    - [ ] 5.3.2 Support configurable weights per algorithm
+    - [ ] 5.3.3 Aggregate confidence scores
+    - [ ] 5.3.4 Handle missing or failed algorithm results
+  - [ ] 5.4 Implement `chartradar/fusion/strategies/voting.py`:
+    - [ ] 5.4.1 Majority voting for categorical predictions
+    - [ ] 5.4.2 Weighted voting option
+    - [ ] 5.4.3 Handle tie-breaking scenarios
+  - [ ] 5.5 Implement `chartradar/fusion/strategies/stacking.py`:
+    - [ ] 5.5.1 Stacking fusion strategy (meta-learner approach)
+    - [ ] 5.5.2 Support for training meta-learner (if needed)
+    - [ ] 5.5.3 Combine predictions from base algorithms
+  - [ ] 5.6 Implement `chartradar/fusion/executor.py` for fusion execution:
+    - [ ] 5.6.1 Load fusion strategies from registry based on config
+    - [ ] 5.6.2 Apply fusion strategies to algorithm results
+    - [ ] 5.6.3 Support sequential fusion (pipeline of fusion operations)
+    - [ ] 5.6.4 Return unified fusion results
+  - [ ] 5.7 Write unit tests for fusion module in `tests/test_fusion/`:
+    - [ ] 5.7.1 Test fusion base class
+    - [ ] 5.7.2 Test each fusion strategy implementation
+    - [ ] 5.7.3 Test executor with multiple strategies
+    - [ ] 5.7.4 Test sequential fusion pipelines
+
+- [ ] 6.0 Data Understanding and Display Module
+  - [ ] 6.1 Implement `chartradar/display/base.py` with `Display` interface:
+    - [ ] 6.1.1 Define `visualize(results)` method
+    - [ ] 6.1.2 Define `export(results, format)` method
+  - [ ] 6.2 Implement `chartradar/display/visualizer.py` for visualization:
+    - [ ] 6.2.1 Plot price charts with detected patterns overlaid
+    - [ ] 6.2.2 Visualize confidence scores
+    - [ ] 6.2.3 Create comparison charts for multiple algorithms
+    - [ ] 6.2.4 Support matplotlib for static plots
+    - [ ] 6.2.5 Optional: Support plotly for interactive plots
+  - [ ] 6.3 Implement `chartradar/display/exporter.py` for data export:
+    - [ ] 6.3.1 Export results to JSON format
+    - [ ] 6.3.2 Export results to CSV format
+    - [ ] 6.3.3 Export plots as image files (PNG, SVG)
+    - [ ] 6.3.4 Support custom export formats via plugins
+  - [ ] 6.4 Implement `chartradar/display/comparator.py` for algorithm comparison:
+    - [ ] 6.4.1 Compare outputs from multiple algorithms
+    - [ ] 6.4.2 Generate comparison statistics
+    - [ ] 6.4.3 Identify agreement/disagreement between algorithms
+  - [ ] 6.5 Implement `chartradar/display/statistics.py` for summary statistics:
+    - [ ] 6.5.1 Calculate pattern detection frequency
+    - [ ] 6.5.2 Compute average confidence scores
+    - [ ] 6.5.3 Generate performance metrics per algorithm
+    - [ ] 6.5.4 Create summary reports
+  - [ ] 6.6 Write unit tests for display module in `tests/test_display/`:
+    - [ ] 6.6.1 Test visualization functions
+    - [ ] 6.6.2 Test export functionality
+    - [ ] 6.6.3 Test comparison utilities
+    - [ ] 6.6.4 Test statistics generation
+
+- [ ] 7.0 Training and Testing Infrastructure for ML Algorithms
+  - [ ] 7.1 Implement `chartradar/training/base.py` with base training interface:
+    - [ ] 7.1.1 Define training loop interface
+    - [ ] 7.1.2 Define evaluation loop interface
+  - [ ] 7.2 Implement `chartradar/training/split.py` for data splitting:
+    - [ ] 7.2.1 Train/validation/test split functionality
+    - [ ] 7.2.2 Time-series aware splitting (avoid data leakage)
+    - [ ] 7.2.3 K-fold cross-validation support
+    - [ ] 7.2.4 Stratified splitting for imbalanced datasets
+  - [ ] 7.3 Implement `chartradar/training/loop.py` for training loops:
+    - [ ] 7.3.1 Generic training loop that works with scikit-learn, TensorFlow, PyTorch
+    - [ ] 7.3.2 Support hyperparameter configuration from YAML
+    - [ ] 7.3.3 Iterate over training batches/epochs
+    - [ ] 7.3.4 Call validation at intervals
+    - [ ] 7.3.5 Support early stopping
+  - [ ] 7.4 Implement `chartradar/training/evaluation.py` for testing/evaluation:
+    - [ ] 7.4.1 Evaluation loop implementation
+    - [ ] 7.4.2 Calculate evaluation metrics (accuracy, precision, recall, F1, etc.)
+    - [ ] 7.4.3 Support custom metric functions
+    - [ ] 7.4.4 Generate evaluation reports
+  - [ ] 7.5 Implement `chartradar/training/checkpoint.py` for model checkpointing:
+    - [ ] 7.5.1 Save model checkpoints during training
+    - [ ] 7.5.2 Load saved models
+    - [ ] 7.5.3 Model versioning system
+    - [ ] 7.5.4 Support for best model selection
+  - [ ] 7.6 Implement `chartradar/training/metrics.py` for metrics logging:
+    - [ ] 7.6.1 Log training metrics (loss, accuracy, etc.)
+    - [ ] 7.6.2 Log validation metrics
+    - [ ] 7.6.3 Support logging to files (CSV, JSON)
+    - [ ] 7.6.4 Optional: Integration hooks for MLflow/Weights&Biases
+  - [ ] 7.7 Implement `chartradar/training/tracking.py` for experiment tracking:
+    - [ ] 7.7.1 Track experiment parameters
+    - [ ] 7.7.2 Track experiment results
+    - [ ] 7.7.3 Store experiment metadata
+    - [ ] 7.7.4 Basic experiment comparison
+  - [ ] 7.8 Write unit tests for training infrastructure in `tests/test_training/`:
+    - [ ] 7.8.1 Test data splitting functions
+    - [ ] 7.8.2 Test training loop with mock models
+    - [ ] 7.8.3 Test evaluation loop
+    - [ ] 7.8.4 Test checkpointing functionality
+    - [ ] 7.8.5 Test metrics logging
+
+- [ ] 8.0 Data Labeling System
+  - [ ] 8.1 Design label storage format (JSON-based structure with metadata)
+  - [ ] 8.2 Implement `chartradar/labeling/storage.py` for label I/O:
+    - [ ] 8.2.1 Save labels to structured format
+    - [ ] 8.2.2 Load labels from storage
+    - [ ] 8.2.3 Support label updates and versioning
+    - [ ] 8.2.4 Query labels by pattern type, date range, etc.
+  - [ ] 8.3 Implement `chartradar/labeling/validator.py` for label validation:
+    - [ ] 8.3.1 Validate label format and structure
+    - [ ] 8.3.2 Check label consistency (e.g., pattern boundaries within data range)
+    - [ ] 8.3.3 Detect duplicate or conflicting labels
+    - [ ] 8.3.4 Generate validation reports
+  - [ ] 8.4 Implement `chartradar/labeling/metadata.py` for metadata tracking:
+    - [ ] 8.4.1 Track labeler identity (who created the label)
+    - [ ] 8.4.2 Track labeling timestamp
+    - [ ] 8.4.3 Track labeling confidence
+    - [ ] 8.4.4 Support multiple labelers and consensus tracking
+  - [ ] 8.5 Implement `chartradar/labeling/exporter.py` for training data export:
+    - [ ] 8.5.1 Export labels in format compatible with ML frameworks
+    - [ ] 8.5.2 Support export to JSON, HDF5, Parquet formats
+    - [ ] 8.5.3 Include associated data segments with labels
+    - [ ] 8.5.4 Generate train/val/test splits during export
+  - [ ] 8.6 Implement `chartradar/labeling/tool.py` as labeling interface:
+    - [ ] 8.6.1 CLI tool for interactive labeling (or API for programmatic labeling)
+    - [ ] 8.6.2 Load data segments for labeling
+    - [ ] 8.6.3 Support manual pattern annotation
+    - [ ] 8.6.4 Support semi-automated labeling (rule-based suggestions)
+    - [ ] 8.6.5 Save labels with metadata
+  - [ ] 8.7 Write unit tests for labeling system in `tests/test_labeling/`:
+    - [ ] 8.7.1 Test label storage I/O
+    - [ ] 8.7.2 Test label validation
+    - [ ] 8.7.3 Test metadata tracking
+    - [ ] 8.7.4 Test export functionality
