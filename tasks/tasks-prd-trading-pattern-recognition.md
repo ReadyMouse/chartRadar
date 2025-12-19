@@ -68,15 +68,15 @@ Based on PRD: `prd-trading-pattern-recognition.md`
 - `tests/test_display/` - Tests for display module (created)
 
 ### Training and Testing Infrastructure
-- `chartradar/training/__init__.py` - Training module initialization
-- `chartradar/training/base.py` - Base training loop interface
-- `chartradar/training/loop.py` - Training loop implementation
-- `chartradar/training/evaluation.py` - Testing/evaluation loop
-- `chartradar/training/split.py` - Data splitting utilities (train/val/test, cross-validation)
-- `chartradar/training/checkpoint.py` - Model checkpointing and saving
-- `chartradar/training/metrics.py` - Training metrics logging
-- `chartradar/training/tracking.py` - Experiment tracking (basic, extensible)
-- `tests/test_training/` - Tests for training infrastructure
+- `chartradar/training/__init__.py` - Training module initialization (created)
+- `chartradar/training/base.py` - Base training loop interface (created)
+- `chartradar/training/loop.py` - Training loop implementation (created)
+- `chartradar/training/evaluation.py` - Testing/evaluation loop (created)
+- `chartradar/training/split.py` - Data splitting utilities (train/val/test, cross-validation) (created)
+- `chartradar/training/checkpoint.py` - Model checkpointing and saving (created)
+- `chartradar/training/metrics.py` - Training metrics logging (created)
+- `chartradar/training/tracking.py` - Experiment tracking (basic, extensible) (created)
+- `tests/test_training/` - Tests for training infrastructure (created)
 
 ### Data Labeling System
 - `chartradar/labeling/__init__.py` - Labeling module initialization
@@ -304,47 +304,47 @@ Based on PRD: `prd-trading-pattern-recognition.md`
     - [x] 6.6.3 Test comparison utilities
     - [x] 6.6.4 Test statistics generation
 
-- [ ] 7.0 Training and Testing Infrastructure for ML Algorithms
-  - [ ] 7.1 Implement `chartradar/training/base.py` with base training interface:
-    - [ ] 7.1.1 Define training loop interface
-    - [ ] 7.1.2 Define evaluation loop interface
-  - [ ] 7.2 Implement `chartradar/training/split.py` for data splitting:
-    - [ ] 7.2.1 Train/validation/test split functionality
-    - [ ] 7.2.2 Time-series aware splitting (avoid data leakage)
-    - [ ] 7.2.3 K-fold cross-validation support
-    - [ ] 7.2.4 Stratified splitting for imbalanced datasets
-  - [ ] 7.3 Implement `chartradar/training/loop.py` for training loops:
-    - [ ] 7.3.1 Generic training loop that works with scikit-learn, TensorFlow, PyTorch
-    - [ ] 7.3.2 Support hyperparameter configuration from YAML
-    - [ ] 7.3.3 Iterate over training batches/epochs
-    - [ ] 7.3.4 Call validation at intervals
-    - [ ] 7.3.5 Support early stopping
-  - [ ] 7.4 Implement `chartradar/training/evaluation.py` for testing/evaluation:
-    - [ ] 7.4.1 Evaluation loop implementation
-    - [ ] 7.4.2 Calculate evaluation metrics (accuracy, precision, recall, F1, etc.)
-    - [ ] 7.4.3 Support custom metric functions
-    - [ ] 7.4.4 Generate evaluation reports
-  - [ ] 7.5 Implement `chartradar/training/checkpoint.py` for model checkpointing:
-    - [ ] 7.5.1 Save model checkpoints during training
-    - [ ] 7.5.2 Load saved models
-    - [ ] 7.5.3 Model versioning system
-    - [ ] 7.5.4 Support for best model selection
-  - [ ] 7.6 Implement `chartradar/training/metrics.py` for metrics logging:
-    - [ ] 7.6.1 Log training metrics (loss, accuracy, etc.)
-    - [ ] 7.6.2 Log validation metrics
-    - [ ] 7.6.3 Support logging to files (CSV, JSON)
-    - [ ] 7.6.4 Optional: Integration hooks for MLflow/Weights&Biases
-  - [ ] 7.7 Implement `chartradar/training/tracking.py` for experiment tracking:
-    - [ ] 7.7.1 Track experiment parameters
-    - [ ] 7.7.2 Track experiment results
-    - [ ] 7.7.3 Store experiment metadata
-    - [ ] 7.7.4 Basic experiment comparison
-  - [ ] 7.8 Write unit tests for training infrastructure in `tests/test_training/`:
-    - [ ] 7.8.1 Test data splitting functions
-    - [ ] 7.8.2 Test training loop with mock models
-    - [ ] 7.8.3 Test evaluation loop
-    - [ ] 7.8.4 Test checkpointing functionality
-    - [ ] 7.8.5 Test metrics logging
+- [x] 7.0 Training and Testing Infrastructure for ML Algorithms
+  - [x] 7.1 Implement `chartradar/training/base.py` with base training interface:
+    - [x] 7.1.1 Define training loop interface
+    - [x] 7.1.2 Define evaluation loop interface
+  - [x] 7.2 Implement `chartradar/training/split.py` for data splitting:
+    - [x] 7.2.1 Train/validation/test split functionality
+    - [x] 7.2.2 Time-series aware splitting (avoid data leakage)
+    - [x] 7.2.3 K-fold cross-validation support
+    - [x] 7.2.4 Stratified splitting for imbalanced datasets
+  - [x] 7.3 Implement `chartradar/training/loop.py` for training loops:
+    - [x] 7.3.1 Generic training loop that works with scikit-learn, TensorFlow, PyTorch
+    - [x] 7.3.2 Support hyperparameter configuration from YAML
+    - [x] 7.3.3 Iterate over training batches/epochs
+    - [x] 7.3.4 Call validation at intervals
+    - [x] 7.3.5 Support early stopping
+  - [x] 7.4 Implement `chartradar/training/evaluation.py` for testing/evaluation:
+    - [x] 7.4.1 Evaluation loop implementation
+    - [x] 7.4.2 Calculate evaluation metrics (accuracy, precision, recall, F1, etc.)
+    - [x] 7.4.3 Support custom metric functions
+    - [x] 7.4.4 Generate evaluation reports
+  - [x] 7.5 Implement `chartradar/training/checkpoint.py` for model checkpointing:
+    - [x] 7.5.1 Save model checkpoints during training
+    - [x] 7.5.2 Load saved models
+    - [x] 7.5.3 Model versioning system
+    - [x] 7.5.4 Support for best model selection
+  - [x] 7.6 Implement `chartradar/training/metrics.py` for metrics logging:
+    - [x] 7.6.1 Log training metrics (loss, accuracy, etc.)
+    - [x] 7.6.2 Log validation metrics
+    - [x] 7.6.3 Support logging to files (CSV, JSON)
+    - [x] 7.6.4 Optional: Integration hooks for MLflow/Weights&Biases
+  - [x] 7.7 Implement `chartradar/training/tracking.py` for experiment tracking:
+    - [x] 7.7.1 Track experiment parameters
+    - [x] 7.7.2 Track experiment results
+    - [x] 7.7.3 Store experiment metadata
+    - [x] 7.7.4 Basic experiment comparison
+  - [x] 7.8 Write unit tests for training infrastructure in `tests/test_training/`:
+    - [x] 7.8.1 Test data splitting functions
+    - [x] 7.8.2 Test training loop with mock models
+    - [x] 7.8.3 Test evaluation loop
+    - [x] 7.8.4 Test checkpointing functionality
+    - [x] 7.8.5 Test metrics logging
 
 - [ ] 8.0 Data Labeling System
   - [ ] 8.1 Design label storage format (JSON-based structure with metadata)
