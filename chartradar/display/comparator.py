@@ -280,18 +280,25 @@ class AlgorithmComparator:
             return pd.DataFrame(rows)
         elif output_format == "string":
             # Create human-readable string report
+            stats = comparison.get('statistics', {})
             lines = [
                 "Algorithm Comparison Report",
                 "=" * 50,
-                f"Total Algorithms: {comparison['total_algorithms']}",
-                f"Total Agreements: {comparison['statistics']['total_agreements']}",
-                f"Total Disagreements: {comparison['statistics']['total_disagreements']}",
-                f"Agreement Rate: {comparison['statistics']['agreement_rate']:.2%}",
+                f"Total Algorithms: {comparison.get('total_algorithms', 0)}",
+                f"Total Agreements: {stats.get('total_agreements', 0)}",
+                f"Total Disagreements: {stats.get('total_disagreements', 0)}",
+                f"Agreement Rate: {stats.get('agreement_rate', 0.0):.2%}",
                 "",
-                "Pattern Type Distribution:",
             ]
-            for pattern_type, count in comparison['statistics']['pattern_type_distribution'].items():
-                lines.append(f"  {pattern_type}: {count}")
+            
+            pattern_dist = stats.get('pattern_type_distribution', {})
+            if pattern_dist:
+                lines.append("Pattern Type Distribution:")
+                for pattern_type, count in pattern_dist.items():
+                    lines.append(f"  {pattern_type}: {count}")
+            else:
+                lines.append("No patterns detected.")
+            
             return "\n".join(lines)
         else:
             return comparison

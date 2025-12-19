@@ -2,6 +2,7 @@
 
 import pytest
 import pandas as pd
+from pathlib import Path
 
 from chartradar.labeling.tool import LabelingTool
 from chartradar.core.exceptions import LabelingError

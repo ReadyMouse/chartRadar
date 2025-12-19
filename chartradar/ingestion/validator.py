@@ -64,6 +64,44 @@ class DataValidator:
         """
         errors: List[str] = []
         warnings: List[str] = []
+        
+        # Check for empty data first (before accessing columns)
+        if data is None:
+            errors.append("Data is None")
+            if raise_on_error:
+                raise DataValidationError("Data is None")
+            return {
+                "valid": False,
+                "errors": errors,
+                "warnings": warnings,
+                "report": {
+                    "total_rows": 0,
+                    "date_range": None,
+                    "ohlc_integrity": {},
+                    "missing_data": {},
+                    "outliers": {},
+                    "statistics": {}
+                }
+            }
+        
+        if data.empty:
+            errors.append("Data is empty")
+            if raise_on_error:
+                raise DataValidationError("Data is empty")
+            return {
+                "valid": False,
+                "errors": errors,
+                "warnings": warnings,
+                "report": {
+                    "total_rows": 0,
+                    "date_range": None,
+                    "ohlc_integrity": {},
+                    "missing_data": {},
+                    "outliers": {},
+                    "statistics": {}
+                }
+            }
+        
         report: Dict[str, Any] = {
             "total_rows": len(data),
             "date_range": None,
@@ -90,8 +128,8 @@ class DataValidator:
                 "duration_days": (data.index.max() - data.index.min()).days
             }
         
-        # OHLC integrity checks
-        if self.check_ohlc_integrity:
+        # OHLC integrity checks (only if data has required columns)
+        if self.check_ohlc_integrity and all(col in data.columns for col in ['open', 'high', 'low', 'close']):
             ohlc_errors = self._check_ohlc_integrity(data)
             report["ohlc_integrity"] = ohlc_errors
             if ohlc_errors.get("errors"):

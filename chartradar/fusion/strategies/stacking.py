@@ -109,27 +109,32 @@ class StackingFusion(FusionStrategy):
             base_features.append(features)
         
         # Apply meta-learner
-        if meta_learner == "average":
-            # Simple average of features
-            meta_output = np.mean(base_features, axis=0)
-            fused_confidence = float(meta_output[0])
-        elif meta_learner == "weighted_average":
-            # Weighted average (weights based on individual confidences)
-            weights = [f[0] for f in base_features]  # Use confidence as weight
-            if sum(weights) > 0:
-                weights = np.array(weights) / sum(weights)
-                meta_output = np.average(base_features, axis=0, weights=weights)
-            else:
+        meta_output = np.array([0.5, 0, 0])  # Default value
+        fused_confidence = 0.5
+        
+        if base_features and len(base_features) > 0:
+            if meta_learner == "average":
+                # Simple average of features
                 meta_output = np.mean(base_features, axis=0)
-            fused_confidence = float(meta_output[0])
-        elif meta_learner == "max":
-            # Take maximum confidence
-            confidences = [f[0] for f in base_features]
-            fused_confidence = float(max(confidences))
-        else:
-            # Default to average
-            meta_output = np.mean(base_features, axis=0)
-            fused_confidence = float(meta_output[0])
+                fused_confidence = float(meta_output[0])
+            elif meta_learner == "weighted_average":
+                # Weighted average (weights based on individual confidences)
+                weights = [f[0] for f in base_features]  # Use confidence as weight
+                if sum(weights) > 0:
+                    weights = np.array(weights) / sum(weights)
+                    meta_output = np.average(base_features, axis=0, weights=weights)
+                else:
+                    meta_output = np.mean(base_features, axis=0)
+                fused_confidence = float(meta_output[0])
+            elif meta_learner == "max":
+                # Take maximum confidence
+                confidences = [f[0] for f in base_features]
+                fused_confidence = float(max(confidences))
+                meta_output = base_features[np.argmax(confidences)]
+            else:
+                # Default to average
+                meta_output = np.mean(base_features, axis=0)
+                fused_confidence = float(meta_output[0])
         
         # Aggregate all patterns
         all_patterns = []

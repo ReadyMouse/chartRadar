@@ -80,6 +80,7 @@ class TestFusionStrategy:
     
     def test_fuse_to_result(self):
         """Test fuse_to_result method."""
+        from chartradar.core.types import FusionResult
         strategy = ConcreteFusionStrategy("test")
         results = [
             AlgorithmResult(

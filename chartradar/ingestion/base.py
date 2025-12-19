@@ -101,6 +101,13 @@ class DataSource(DataSourceBase):
         Raises:
             DataSourceError: If data is invalid
         """
+        # Check for empty data first
+        if len(data) == 0:
+            raise DataSourceError(
+                "Data is empty",
+                details={}
+            )
+        
         required_columns = ['open', 'high', 'low', 'close', 'volume']
         missing_columns = [col for col in required_columns if col not in data.columns]
         
@@ -114,12 +121,6 @@ class DataSource(DataSourceBase):
             raise DataSourceError(
                 "Data index must be a DatetimeIndex",
                 details={"index_type": type(data.index).__name__}
-            )
-        
-        if len(data) == 0:
-            raise DataSourceError(
-                "Data is empty",
-                details={}
             )
         
         return True

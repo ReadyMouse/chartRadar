@@ -24,6 +24,8 @@ class TestWedgeDetector:
     
     def test_process_insufficient_data(self):
         """Test processing with insufficient data."""
+        from chartradar.core.exceptions import AlgorithmError
+        
         detector = WedgeDetector(lookback_period=50)
         data = pd.DataFrame({
             'open': range(10),
@@ -33,9 +35,10 @@ class TestWedgeDetector:
             'volume': range(100, 110)
         }, index=pd.date_range('2024-01-01', periods=10))
         
-        result = detector.process(data)
-        assert len(result["results"]) == 0
-        assert "Insufficient data points" in result["metadata"]["message"]
+        # Should raise AlgorithmError for insufficient data
+        with pytest.raises(AlgorithmError) as exc_info:
+            detector.process(data)
+        assert "requires at least" in str(exc_info.value).lower() or "data points" in str(exc_info.value).lower()
     
     def test_process_sufficient_data(self):
         """Test processing with sufficient data."""
@@ -92,6 +95,8 @@ class TestTriangleDetector:
     
     def test_process_insufficient_data(self):
         """Test processing with insufficient data."""
+        from chartradar.core.exceptions import AlgorithmError
+        
         detector = TriangleDetector(lookback_period=60)
         data = pd.DataFrame({
             'open': range(10),
@@ -101,8 +106,10 @@ class TestTriangleDetector:
             'volume': range(100, 110)
         }, index=pd.date_range('2024-01-01', periods=10))
         
-        result = detector.process(data)
-        assert len(result["results"]) == 0
+        # Should raise AlgorithmError for insufficient data
+        with pytest.raises(AlgorithmError) as exc_info:
+            detector.process(data)
+        assert "requires at least" in str(exc_info.value).lower() or "data points" in str(exc_info.value).lower()
     
     def test_process_sufficient_data(self):
         """Test processing with sufficient data."""

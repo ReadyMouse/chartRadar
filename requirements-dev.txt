@@ -1,0 +1,16 @@
+# Development dependencies for chartradar
+# Install with: pip install -r requirements-dev.txt
+
+# Core dependencies (from requirements.txt)
+-r requirements.txt
+
+# Testing
+pytest>=7.0.0
+pytest-cov>=4.0.0
+pytest-asyncio>=0.21.0
+
+# Code formatting and linting
+black>=23.0.0
+ruff>=0.1.0
+mypy>=1.0.0
+

@@ -11,8 +11,8 @@ from chartradar.metrics.base import Algorithm
 from chartradar.core.exceptions import AlgorithmNotFoundError
 
 
-class TestAlgorithm(Algorithm):
-    """Test algorithm for registry tests."""
+class MockAlgorithm(Algorithm):
+    """Mock algorithm for registry tests."""
     
     def process(self, data, **kwargs):
         return {
@@ -48,17 +48,17 @@ class TestAlgorithmRegistry:
     def test_register_algorithm(self):
         """Test registering an algorithm."""
         registry = AlgorithmRegistry()
-        registry.register(TestAlgorithm, name="test_alg", version="1.0.0")
+        registry.register(MockAlgorithm, name="test_alg", version="1.0.0")
         
         assert "test_alg" in registry.list_algorithms()
     
     def test_get_algorithm(self):
         """Test getting an algorithm."""
         registry = AlgorithmRegistry()
-        registry.register(TestAlgorithm, name="test_alg", version="1.0.0")
+        registry.register(MockAlgorithm, name="test_alg", version="1.0.0")
         
         alg_class = registry.get_algorithm("test_alg")
-        assert alg_class == TestAlgorithm
+        assert alg_class == MockAlgorithm
     
     def test_get_algorithm_not_found(self):
         """Test getting non-existent algorithm."""
@@ -70,26 +70,26 @@ class TestAlgorithmRegistry:
     def test_get_latest_version(self):
         """Test getting latest version of algorithm."""
         registry = AlgorithmRegistry()
-        registry.register(TestAlgorithm, name="test_alg", version="1.0.0")
-        registry.register(TestAlgorithm, name="test_alg", version="2.0.0")
+        registry.register(MockAlgorithm, name="test_alg", version="1.0.0")
+        registry.register(MockAlgorithm, name="test_alg", version="2.0.0")
         
         alg_class = registry.get_algorithm("test_alg")  # Should get latest
-        assert alg_class == TestAlgorithm
+        assert alg_class == MockAlgorithm
     
     def test_create_algorithm(self):
         """Test creating algorithm instance."""
         registry = AlgorithmRegistry()
-        registry.register(TestAlgorithm, name="test_alg", version="1.0.0")
+        registry.register(MockAlgorithm, name="test_alg", version="1.0.0")
         
         alg = registry.create_algorithm("test_alg", param1="value1")
-        assert isinstance(alg, TestAlgorithm)
+        assert isinstance(alg, MockAlgorithm)
         assert alg.parameters["param1"] == "value1"
     
     def test_list_algorithms(self):
         """Test listing algorithms."""
         registry = AlgorithmRegistry()
-        registry.register(TestAlgorithm, name="alg1")
-        registry.register(TestAlgorithm, name="alg2")
+        registry.register(MockAlgorithm, name="alg1")
+        registry.register(MockAlgorithm, name="alg2")
         
         algorithms = registry.list_algorithms()
         assert "alg1" in algorithms
@@ -98,8 +98,8 @@ class TestAlgorithmRegistry:
     def test_list_versions(self):
         """Test listing algorithm versions."""
         registry = AlgorithmRegistry()
-        registry.register(TestAlgorithm, name="test_alg", version="1.0.0")
-        registry.register(TestAlgorithm, name="test_alg", version="2.0.0")
+        registry.register(MockAlgorithm, name="test_alg", version="1.0.0")
+        registry.register(MockAlgorithm, name="test_alg", version="2.0.0")
         
         versions = registry.list_versions("test_alg")
         assert "1.0.0" in versions
@@ -133,16 +133,16 @@ class TestConvenienceFunctions:
     def test_get_algorithm_function(self):
         """Test get_algorithm convenience function."""
         from chartradar.metrics.registry import _default_registry
-        _default_registry.register(TestAlgorithm, name="convenience_alg")
+        _default_registry.register(MockAlgorithm, name="convenience_alg")
         
         alg_class = get_algorithm("convenience_alg")
-        assert alg_class == TestAlgorithm
+        assert alg_class == MockAlgorithm
     
     def test_create_algorithm_function(self):
         """Test create_algorithm convenience function."""
         from chartradar.metrics.registry import _default_registry
-        _default_registry.register(TestAlgorithm, name="convenience_alg2")
+        _default_registry.register(MockAlgorithm, name="convenience_alg2")
         
         alg = create_algorithm("convenience_alg2")
-        assert isinstance(alg, TestAlgorithm)
+        assert isinstance(alg, MockAlgorithm)
 

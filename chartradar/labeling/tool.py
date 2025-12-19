@@ -169,14 +169,18 @@ class LabelingTool:
         
         labels = self.current_session["labels"]
         
-        # Validate if requested
+        # Validate if requested (only if there are labels to validate)
         if validate:
-            validation_result = self.validator.validate(labels, raise_on_error=False)
-            if not validation_result["valid"]:
-                raise LabelingError(
-                    f"Label validation failed: {validation_result['errors']}",
-                    details=validation_result
-                )
+            if not labels:
+                # Empty labels are valid (user might save an empty session)
+                pass
+            else:
+                validation_result = self.validator.validate(labels, raise_on_error=False)
+                if not validation_result["valid"]:
+                    raise LabelingError(
+                        f"Label validation failed: {validation_result['errors']}",
+                        details=validation_result
+                    )
         
         # Save labels
         dataset_name = self.current_session["dataset_name"]

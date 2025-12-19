@@ -196,16 +196,17 @@ def load_config(
     if substitute_env:
         merged_config = substitute_env_vars(merged_config)
     
-    # Validate against schema if requested
-    if validate:
-        try:
-            return FrameworkConfig(**merged_config)
-        except Exception as e:
-            raise ConfigurationError(
-                f"Configuration validation failed: {str(e)}",
-                details={"config_path": config_path, "error": str(e)}
-            ) from e
-    else:
-        # Return unvalidated config (for testing or advanced use cases)
-        return FrameworkConfig.model_validate(merged_config)
+        # Validate against schema if requested
+        if validate:
+            try:
+                return FrameworkConfig(**merged_config)
+            except Exception as e:
+                raise ConfigurationError(
+                    f"Configuration validation failed: {str(e)}",
+                    details={"config_path": config_path, "error": str(e)}
+                ) from e
+        else:
+            # Return unvalidated config (for testing or advanced use cases)
+            # Use model_construct to skip validation
+            return FrameworkConfig.model_construct(**merged_config)
 

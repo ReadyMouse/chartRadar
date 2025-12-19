@@ -21,12 +21,13 @@ class MockAlgorithm(Algorithm):
         if self.should_fail:
             raise Exception("Mock algorithm failure")
         
+        from datetime import datetime
         return {
             "algorithm_name": self.name,
             "results": [],
             "confidence_scores": [0.8],
             "metadata": {"test": True},
-            "timestamp": None
+            "timestamp": datetime.now()
         }
     
     def get_metadata(self):

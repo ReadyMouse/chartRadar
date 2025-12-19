@@ -190,6 +190,14 @@ class BatchDataSource(DataSource):
         
         return data[mask]
     
+    async def stream_data(self, callback: callable, **kwargs: Any) -> None:
+        """
+        Stream data (not supported for batch sources).
+        
+        Batch data sources do not support streaming.
+        """
+        raise NotImplementedError("Batch data sources do not support streaming")
+    
     def get_metadata(self) -> Dict[str, Any]:
         """Get metadata about this batch data source."""
         return {

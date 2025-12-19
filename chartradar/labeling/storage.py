@@ -111,14 +111,14 @@ class LabelStorage:
             if not label_files:
                 raise LabelingError(
                     f"No labels found for dataset '{dataset_name}'",
-                    details={"dataset_name": dataset_name}
+                    details={"dataset_name": dataset_name, "storage_path": str(self.storage_path)}
                 )
             label_file = max(label_files, key=lambda p: p.stat().st_mtime)
         
         if not label_file.exists():
             raise LabelingError(
                 f"Label file not found: {label_file}",
-                details={"label_file": str(label_file)}
+                details={"label_file": str(label_file), "storage_path": str(self.storage_path)}
             )
         
         try:

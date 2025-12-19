@@ -15,7 +15,8 @@ class TestModelCheckpointer:
         """Test saving a checkpoint."""
         checkpointer = ModelCheckpointer(save_dir=str(tmp_path))
         
-        model = Mock()
+        # Use a simple dict as model (pickle-able)
+        model = {"weights": [1, 2, 3], "type": "test_model"}
         metrics = {"loss": 0.5, "accuracy": 0.9}
         
         checkpoint_path = checkpointer.save_checkpoint(model, epoch=1, metrics=metrics)
@@ -28,7 +29,8 @@ class TestModelCheckpointer:
         """Test loading a checkpoint."""
         checkpointer = ModelCheckpointer(save_dir=str(tmp_path))
         
-        model = Mock()
+        # Use a simple dict as model (pickle-able)
+        model = {"weights": [1, 2, 3], "type": "test_model"}
         metrics = {"loss": 0.5}
         
         checkpoint_path = checkpointer.save_checkpoint(model, epoch=1, metrics=metrics)
@@ -37,6 +39,7 @@ class TestModelCheckpointer:
         
         assert "model" in loaded
         assert "metadata" in loaded
+        assert loaded["model"]["type"] == "test_model"
     
     def test_load_checkpoint_not_found(self, tmp_path):
         """Test loading non-existent checkpoint."""
@@ -50,8 +53,9 @@ class TestModelCheckpointer:
         """Test saving best model."""
         checkpointer = ModelCheckpointer(save_dir=str(tmp_path), save_best=True, monitor="val_loss")
         
-        model1 = Mock()
-        model2 = Mock()
+        # Use simple dicts as models (pickle-able)
+        model1 = {"weights": [1, 2, 3], "type": "test_model1"}
+        model2 = {"weights": [4, 5, 6], "type": "test_model2"}
         
         # Save first checkpoint
         checkpointer.save_checkpoint(model1, epoch=1, metrics={"val_loss": 0.5})
@@ -65,7 +69,8 @@ class TestModelCheckpointer:
         """Test listing checkpoints."""
         checkpointer = ModelCheckpointer(save_dir=str(tmp_path))
         
-        model = Mock()
+        # Use a simple dict as model (pickle-able)
+        model = {"weights": [1, 2, 3], "type": "test_model"}
         checkpointer.save_checkpoint(model, epoch=1, metrics={})
         checkpointer.save_checkpoint(model, epoch=2, metrics={})
         

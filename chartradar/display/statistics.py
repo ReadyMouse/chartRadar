@@ -5,7 +5,7 @@ This module provides functions to calculate pattern detection frequency,
 average confidence scores, performance metrics, and generate summary reports.
 """
 
-from typing import Any, Dict, List
+from typing import Any, Dict, List, Optional
 from collections import Counter, defaultdict
 from datetime import datetime
 import pandas as pd

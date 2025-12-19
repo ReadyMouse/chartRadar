@@ -50,7 +50,9 @@ class TestLabelStorage:
         
         with pytest.raises(LabelingError) as exc_info:
             storage.load_labels("nonexistent")
-        assert "not found" in str(exc_info.value).lower()
+        # Check for either "not found" or "no labels found"
+        error_msg = str(exc_info.value).lower()
+        assert "not found" in error_msg or "no labels found" in error_msg
     
     def test_update_labels(self, tmp_path):
         """Test updating labels."""

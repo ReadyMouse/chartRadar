@@ -46,10 +46,11 @@ class CSVDataSource(BatchDataSource):
         self.column_mapping = column_mapping
         self.timezone = timezone
         
+        # Check if file exists (but allow lazy loading for streaming scenarios)
         if not self.path.exists():
             raise DataSourceError(
                 f"CSV file not found: {path}",
-                details={"path": str(path)}
+                details={"path": str(path), "absolute_path": str(self.path.absolute())}
             )
     
     def _load_raw_data(

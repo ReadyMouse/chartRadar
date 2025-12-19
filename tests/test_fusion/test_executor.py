@@ -14,7 +14,15 @@ class TestFusionExecutor:
     
     def test_execute_basic(self):
         """Test basic fusion execution."""
-        executor = FusionExecutor()
+        # Import strategies to trigger registration
+        from chartradar.fusion.strategies import WeightedAverageFusion
+        from chartradar.fusion.registry import _default_registry
+        
+        # Ensure strategies are registered
+        if "weighted_average" not in _default_registry.list_strategies():
+            _default_registry.register(WeightedAverageFusion, name="weighted_average")
+        
+        executor = FusionExecutor(registry=_default_registry)
         
         algorithm_results = [
             AlgorithmResult(
@@ -69,7 +77,17 @@ class TestFusionExecutor:
     
     def test_execute_sequential(self):
         """Test sequential fusion pipeline."""
-        executor = FusionExecutor()
+        # Import strategies to trigger registration
+        from chartradar.fusion.strategies import WeightedAverageFusion, VotingFusion
+        from chartradar.fusion.registry import _default_registry
+        
+        # Ensure strategies are registered
+        if "weighted_average" not in _default_registry.list_strategies():
+            _default_registry.register(WeightedAverageFusion, name="weighted_average")
+        if "voting" not in _default_registry.list_strategies():
+            _default_registry.register(VotingFusion, name="voting")
+        
+        executor = FusionExecutor(registry=_default_registry)
         
         algorithm_results = [
             AlgorithmResult(
