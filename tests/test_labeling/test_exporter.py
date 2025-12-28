@@ -5,7 +5,7 @@ import pandas as pd
 from pathlib import Path
 
 from chartradar.labeling.exporter import LabelExporter
-from chartradar.core.exceptions import LabelingError
+from chartradar.src.exceptions import LabelingError
 
 
 class TestLabelExporter:

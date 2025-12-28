@@ -5,8 +5,8 @@ from datetime import datetime
 
 from chartradar.fusion.executor import FusionExecutor
 from chartradar.fusion.registry import FusionStrategyRegistry
-from chartradar.core.types import AlgorithmResult
-from chartradar.core.exceptions import FusionError
+from chartradar.src.types import AlgorithmResult
+from chartradar.src.exceptions import FusionError
 
 
 class TestFusionExecutor:
@@ -119,7 +119,7 @@ class TestFusionExecutor:
         """Test getting execution summary."""
         executor = FusionExecutor()
         
-        from chartradar.core.types import FusionResult
+        from chartradar.src.types import FusionResult
         result = FusionResult(
             fusion_method="weighted_average",
             timestamp=datetime.now(),

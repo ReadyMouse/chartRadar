@@ -15,8 +15,8 @@ import pandas as pd
 
 from chartradar.metrics.base import Algorithm
 from chartradar.metrics.registry import AlgorithmRegistry
-from chartradar.core.types import AlgorithmResult
-from chartradar.core.exceptions import AlgorithmError
+from chartradar.src.types import AlgorithmResult
+from chartradar.src.exceptions import AlgorithmError
 
 logger = logging.getLogger(__name__)
 

@@ -8,8 +8,8 @@ from abc import ABC, abstractmethod
 from typing import Any, Dict, Optional
 import pandas as pd
 
-from chartradar.core.interfaces import DataSourceBase
-from chartradar.core.exceptions import DataSourceError
+from chartradar.src.interfaces import DataSourceBase
+from chartradar.src.exceptions import DataSourceError
 
 
 class DataSource(DataSourceBase):

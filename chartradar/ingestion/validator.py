@@ -9,7 +9,7 @@ from typing import Any, Dict, List, Optional
 import pandas as pd
 import numpy as np
 
-from chartradar.core.exceptions import DataValidationError
+from chartradar.src.exceptions import DataValidationError
 
 
 class DataValidator:

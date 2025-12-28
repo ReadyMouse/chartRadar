@@ -11,7 +11,7 @@ from datetime import datetime
 import pandas as pd
 import numpy as np
 
-from chartradar.core.types import AlgorithmResult, FusionResult, PatternDetection
+from chartradar.src.types import AlgorithmResult, FusionResult, PatternDetection
 
 
 class StatisticsGenerator:

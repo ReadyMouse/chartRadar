@@ -3,7 +3,7 @@
 import pytest
 
 from chartradar.labeling.validator import LabelValidator
-from chartradar.core.exceptions import LabelValidationError
+from chartradar.src.exceptions import LabelValidationError
 
 
 class TestLabelValidator:

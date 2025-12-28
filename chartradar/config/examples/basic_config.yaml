@@ -10,8 +10,8 @@ data_sources:
     type: "csv"
     enabled: true
     parameters:
-      path: "${DATA_PATH:-./data/ohlcv.csv}"
-      date_column: "timestamp"
+      path: "data/sample_ohlcv.csv"
+      date_column: null  # Date is in the index
       format: "standard"
 
 # Algorithms
@@ -21,6 +21,15 @@ algorithms:
     parameters:
       min_confidence: 0.6
       lookback_period: 50
+  
+  - name: "ma_slope_detector"
+    enabled: true
+    version: "1.0.0"
+    parameters:
+      ma_periods: [10, 20, 50, 200]
+      slope_lookback: 5
+      slope_threshold: 0.001
+      min_confidence: 0.6
 
 # Fusion
 fusion:

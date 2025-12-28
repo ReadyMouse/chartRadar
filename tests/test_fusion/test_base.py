@@ -4,8 +4,8 @@ import pytest
 from datetime import datetime
 
 from chartradar.fusion.base import FusionStrategy
-from chartradar.core.types import AlgorithmResult, PatternDetection
-from chartradar.core.exceptions import FusionError
+from chartradar.src.types import AlgorithmResult, PatternDetection
+from chartradar.src.exceptions import FusionError
 
 
 class ConcreteFusionStrategy(FusionStrategy):
@@ -80,7 +80,7 @@ class TestFusionStrategy:
     
     def test_fuse_to_result(self):
         """Test fuse_to_result method."""
-        from chartradar.core.types import FusionResult
+        from chartradar.src.types import FusionResult
         strategy = ConcreteFusionStrategy("test")
         results = [
             AlgorithmResult(

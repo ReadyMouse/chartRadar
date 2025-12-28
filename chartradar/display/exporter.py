@@ -16,8 +16,8 @@ try:
 except ImportError:
     MATPLOTLIB_AVAILABLE = False
 
-from chartradar.core.exceptions import DisplayError
-from chartradar.core.types import AlgorithmResult, FusionResult, PatternDetection
+from chartradar.src.exceptions import DisplayError
+from chartradar.src.types import AlgorithmResult, FusionResult, PatternDetection
 
 
 class Exporter:

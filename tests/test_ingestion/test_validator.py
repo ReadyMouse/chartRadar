@@ -5,7 +5,7 @@ import pandas as pd
 import numpy as np
 
 from chartradar.ingestion.validator import DataValidator, validate_data
-from chartradar.core.exceptions import DataValidationError
+from chartradar.src.exceptions import DataValidationError
 
 
 class TestDataValidator:

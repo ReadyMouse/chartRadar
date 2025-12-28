@@ -9,9 +9,9 @@ from abc import ABC, abstractmethod
 from typing import Any, Dict, List
 from datetime import datetime
 
-from chartradar.core.interfaces import FusionStrategyBase
-from chartradar.core.types import AlgorithmResult, FusionResult
-from chartradar.core.exceptions import FusionError
+from chartradar.src.interfaces import FusionStrategyBase
+from chartradar.src.types import AlgorithmResult, FusionResult
+from chartradar.src.exceptions import FusionError
 
 
 class FusionStrategy(FusionStrategyBase):

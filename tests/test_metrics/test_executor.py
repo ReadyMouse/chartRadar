@@ -7,7 +7,7 @@ from unittest.mock import Mock, patch
 from chartradar.metrics.executor import AlgorithmExecutor
 from chartradar.metrics.registry import AlgorithmRegistry
 from chartradar.metrics.base import Algorithm
-from chartradar.core.types import AlgorithmResult
+from chartradar.src.types import AlgorithmResult
 
 
 class MockAlgorithm(Algorithm):

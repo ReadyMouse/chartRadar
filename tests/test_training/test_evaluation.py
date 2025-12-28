@@ -5,7 +5,7 @@ import pandas as pd
 import numpy as np
 
 from chartradar.training.evaluation import GenericEvaluationLoop
-from chartradar.core.exceptions import EvaluationError
+from chartradar.src.exceptions import EvaluationError
 
 
 class TestGenericEvaluationLoop:

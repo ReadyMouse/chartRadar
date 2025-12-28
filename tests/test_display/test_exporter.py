@@ -6,8 +6,8 @@ from pathlib import Path
 from datetime import datetime
 
 from chartradar.display.exporter import Exporter
-from chartradar.core.types import AlgorithmResult, PatternDetection
-from chartradar.core.exceptions import DisplayError
+from chartradar.src.types import AlgorithmResult, PatternDetection
+from chartradar.src.exceptions import DisplayError
 
 
 class TestExporter:

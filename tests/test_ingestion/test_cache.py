@@ -7,7 +7,7 @@ import tempfile
 from datetime import timedelta
 
 from chartradar.ingestion.cache import DataCache
-from chartradar.core.exceptions import DataSourceError
+from chartradar.src.exceptions import DataSourceError
 
 
 class TestDataCache:

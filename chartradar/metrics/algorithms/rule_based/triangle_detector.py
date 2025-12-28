@@ -12,8 +12,8 @@ import numpy as np
 
 from chartradar.metrics.base import Algorithm
 from chartradar.metrics.registry import register_algorithm
-from chartradar.core.types import PatternDetection
-from chartradar.core.exceptions import AlgorithmError
+from chartradar.src.types import PatternDetection
+from chartradar.src.exceptions import AlgorithmError
 
 
 @register_algorithm(name="triangle_detector", version="1.0.0")

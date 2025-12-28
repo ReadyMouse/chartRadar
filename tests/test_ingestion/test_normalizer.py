@@ -9,7 +9,7 @@ from chartradar.ingestion.normalizer import (
     normalize_timezone,
     standardize_column_names,
 )
-from chartradar.core.exceptions import DataValidationError
+from chartradar.src.exceptions import DataValidationError
 
 
 class TestNormalizeDataframe:

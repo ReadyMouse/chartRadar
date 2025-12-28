@@ -41,6 +41,16 @@ algorithms:
       min_confidence: 0.65
       lookback_period: 60
       pattern_types: ["rising_triangle", "falling_triangle", "symmetrical_triangle"]
+  
+  - name: "ma_slope_detector"
+    enabled: true
+    version: "1.0.0"
+    weight: 0.5
+    parameters:
+      ma_periods: [10, 20, 50, 200]
+      slope_lookback: 5
+      slope_threshold: 0.001
+      min_confidence: 0.6
 
 # Fusion
 fusion:

@@ -12,7 +12,7 @@ from pathlib import Path
 from datetime import datetime
 import logging
 
-from chartradar.core.exceptions import TrainingError
+from chartradar.src.exceptions import TrainingError
 
 logger = logging.getLogger(__name__)
 

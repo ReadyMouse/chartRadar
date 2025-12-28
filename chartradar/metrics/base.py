@@ -10,9 +10,9 @@ from typing import Any, Dict, Optional
 from datetime import datetime
 import pandas as pd
 
-from chartradar.core.interfaces import AlgorithmBase
-from chartradar.core.types import AlgorithmResult, PatternDetection
-from chartradar.core.exceptions import AlgorithmError
+from chartradar.src.interfaces import AlgorithmBase
+from chartradar.src.types import AlgorithmResult, PatternDetection
+from chartradar.src.exceptions import AlgorithmError
 
 
 class Algorithm(AlgorithmBase):

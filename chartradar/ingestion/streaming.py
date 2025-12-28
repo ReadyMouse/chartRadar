@@ -11,7 +11,7 @@ import pandas as pd
 from datetime import datetime
 
 from chartradar.ingestion.base import DataSource
-from chartradar.core.exceptions import DataSourceError
+from chartradar.src.exceptions import DataSourceError
 
 
 class StreamingDataSource(DataSource):

@@ -8,8 +8,8 @@ from abc import ABC, abstractmethod
 from typing import Any, Dict, Optional
 import pandas as pd
 
-from chartradar.core.interfaces import DisplayBase
-from chartradar.core.exceptions import DisplayError
+from chartradar.src.interfaces import DisplayBase
+from chartradar.src.exceptions import DisplayError
 
 
 class Display(DisplayBase):

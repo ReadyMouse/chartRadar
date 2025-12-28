@@ -2,7 +2,7 @@
 
 **Extracting the signal from the noise, in crypto trading.**
 
-ChartRadar is a modular, extensible Python framework for trading pattern recognition and analysis. The framework is designed with a pluggable architecture where algorithms can be swapped in and out of different modules, configured via YAML files.
+ChartRadar is a modular, extensible Python framework for trading pattern recognition and analysis. Detect wedges, triangles, and other chart patterns in cryptocurrency price data using rule-based and ML algorithms. Configure everything via YAML, no code changes needed.
 
 ## Features
 
@@ -13,6 +13,30 @@ ChartRadar is a modular, extensible Python framework for trading pattern recogni
 - **Dual Data Modes**: Support for both batch (chunked) and streaming data processing
 - **ML Infrastructure**: Training and testing loops for ML-based algorithms
 - **Data Labeling**: Tools and methods for creating labeled training datasets
+
+## Available Algorithms
+
+### Rule-Based Detectors
+
+- [UNTESTED]**Wedge Detector**: Rising and falling wedge pattern detection
+- [UNTESTED]**Triangle Detector**: Rising, falling, and symmetrical triangle patterns
+- [UNTESTED]**MA Slope Detector**: Multi-timeframe moving average trend analysis
+
+Run any detector using the framework:
+
+```bash
+# Download real market data first
+python download_kraken_data.py
+
+# Wedge pattern detection
+python -m chartradar --config chartradar/config/examples/basic_config.yaml --data data/kraken_BTC_USD_1h.csv
+
+# Moving Average Slope analysis
+python -m chartradar --config chartradar/config/examples/ma_slope_config.yaml --data data/kraken_BTC_USD_1h.csv
+
+# Multiple detectors (wedge, triangle, and MA slope)
+python -m chartradar --config chartradar/config/examples/full_config.yaml --data data/kraken_BTC_USD_1h.csv
+```
 
 ## Installation
 
@@ -48,32 +72,52 @@ pip install -r requirements.txt
 pip install -r requirements-dev.txt
 ```
 
+## Getting Real Data
+
+Download live market data from Kraken exchange:
+
+```bash
+# Download BTC/USD data (default: 1000 candles, 1h timeframe)
+python download_kraken_data.py
+
+# Download different pairs or timeframes
+python download_kraken_data.py --symbol ETH/USD --timeframe 4h --limit 2000
+python download_kraken_data.py --symbol ZEC/USD --timeframe 1d
+```
+
+Data is saved to `data/kraken_*.csv` and ready to use with the pipeline.
+
 ## Quick Start
 
+```bash
+# Download real market data
+python download_kraken_data.py
+
+# Run pattern detection with basic config
+python -m chartradar --config chartradar/config/examples/basic_config.yaml --data data/kraken_BTC_USD_1h.csv
+
+# Results saved to ./output/ directory
+```
+
+Or use the Python API:
+
 ```python
-from chartradar.core.pipeline import Pipeline
+from chartradar.config.loader import load_config
+from chartradar.src.integrated_pipeline import IntegratedPipeline
 
-# Load configuration from YAML
-config = {
-    "data_source": {
-        "type": "csv",
-        "path": "data/ohlcv.csv"
-    },
-    "algorithms": [
-        {"name": "wedge_detector", "parameters": {}}
-    ]
-}
+# Load configuration
+config = load_config("chartradar/config/examples/basic_config.yaml")
 
-# Create and run pipeline
-pipeline = Pipeline(config)
-results = pipeline.run()
+# Run pipeline
+pipeline = IntegratedPipeline(config)
+pipeline.run(data_path="data/kraken_BTC_USD_1h.csv")
 ```
 
 ## Project Structure
 
 ```
 chartradar/
-├── core/           # Core framework components (interfaces, types, pipeline)
+├── src/            # Core framework components (interfaces, types, pipeline)
 ├── config/         # Configuration system (YAML loading, validation)
 ├── ingestion/      # Data ingestion module (batch and streaming)
 ├── metrics/        # Algorithm bank and execution engine

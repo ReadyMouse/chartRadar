@@ -9,8 +9,8 @@ from typing import Any, Dict, List, Optional
 import pandas as pd
 from datetime import datetime
 
-from chartradar.core.logger import get_logger
-from chartradar.core.exceptions import (
+from chartradar.src.logger import get_logger
+from chartradar.src.exceptions import (
     PipelineError,
     ConfigurationError,
     DataSourceError,
@@ -18,7 +18,7 @@ from chartradar.core.exceptions import (
     FusionError,
     DisplayError
 )
-from chartradar.core.types import AlgorithmResult, FusionResult
+from chartradar.src.types import AlgorithmResult, FusionResult
 
 logger = get_logger(__name__)
 

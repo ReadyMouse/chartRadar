@@ -6,7 +6,7 @@ from datetime import datetime
 from chartradar.fusion.strategies.weighted_average import WeightedAverageFusion
 from chartradar.fusion.strategies.voting import VotingFusion
 from chartradar.fusion.strategies.stacking import StackingFusion
-from chartradar.core.types import PatternDetection
+from chartradar.src.types import PatternDetection
 
 
 class TestWeightedAverageFusion:

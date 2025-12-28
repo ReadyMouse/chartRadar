@@ -24,7 +24,7 @@ class TestWedgeDetector:
     
     def test_process_insufficient_data(self):
         """Test processing with insufficient data."""
-        from chartradar.core.exceptions import AlgorithmError
+        from chartradar.src.exceptions import AlgorithmError
         
         detector = WedgeDetector(lookback_period=50)
         data = pd.DataFrame({
@@ -95,7 +95,7 @@ class TestTriangleDetector:
     
     def test_process_insufficient_data(self):
         """Test processing with insufficient data."""
-        from chartradar.core.exceptions import AlgorithmError
+        from chartradar.src.exceptions import AlgorithmError
         
         detector = TriangleDetector(lookback_period=60)
         data = pd.DataFrame({

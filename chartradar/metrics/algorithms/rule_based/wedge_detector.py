@@ -12,8 +12,8 @@ import numpy as np
 
 from chartradar.metrics.base import Algorithm
 from chartradar.metrics.registry import register_algorithm
-from chartradar.core.types import PatternDetection
-from chartradar.core.exceptions import AlgorithmError
+from chartradar.src.types import PatternDetection
+from chartradar.src.exceptions import AlgorithmError
 
 
 @register_algorithm(name="wedge_detector", version="1.0.0")
@@ -281,7 +281,9 @@ class WedgeDetector(Algorithm):
             return 0.0
         
         x = np.array(indices)
-        y = values[indices]
+        # values is already the subset of values at the given indices
+        # so we just use it directly, not values[indices]
+        y = np.array(values) if not isinstance(values, np.ndarray) else values
         
         # Simple linear regression
         n = len(x)

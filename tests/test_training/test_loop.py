@@ -5,7 +5,7 @@ import pandas as pd
 from unittest.mock import Mock
 
 from chartradar.training.loop import GenericTrainingLoop
-from chartradar.core.exceptions import TrainingError
+from chartradar.src.exceptions import TrainingError
 
 
 class TestGenericTrainingLoop:

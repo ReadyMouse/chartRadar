@@ -3,7 +3,7 @@
 import pytest
 from unittest.mock import Mock
 
-from chartradar.core.exceptions import ConfigurationError
+from chartradar.src.exceptions import ConfigurationError
 from chartradar.config.validator import ConfigValidator, validate_config
 from chartradar.config.schema import (
     FrameworkConfig,

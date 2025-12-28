@@ -5,7 +5,7 @@ import pandas as pd
 import numpy as np
 
 from chartradar.training.split import DataSplitter
-from chartradar.core.exceptions import TrainingError
+from chartradar.src.exceptions import TrainingError
 
 
 class TestDataSplitter:

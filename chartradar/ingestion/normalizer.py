@@ -10,7 +10,7 @@ import pandas as pd
 from datetime import datetime
 import pytz
 
-from chartradar.core.exceptions import DataValidationError
+from chartradar.src.exceptions import DataValidationError
 
 
 # Common column name mappings

@@ -9,7 +9,7 @@ from typing import Any, Dict, List, Set, Tuple
 from collections import defaultdict, Counter
 import pandas as pd
 
-from chartradar.core.types import AlgorithmResult, PatternDetection
+from chartradar.src.types import AlgorithmResult, PatternDetection
 
 
 class AlgorithmComparator:

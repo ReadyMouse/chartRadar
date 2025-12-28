@@ -12,7 +12,7 @@ import numpy as np
 
 from chartradar.fusion.base import FusionStrategy
 from chartradar.fusion.registry import register_fusion_strategy
-from chartradar.core.exceptions import FusionError
+from chartradar.src.exceptions import FusionError
 
 
 @register_fusion_strategy(name="voting", version="1.0.0")

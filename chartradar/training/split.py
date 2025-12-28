@@ -10,7 +10,7 @@ import pandas as pd
 import numpy as np
 from sklearn.model_selection import KFold, StratifiedKFold, TimeSeriesSplit
 
-from chartradar.core.exceptions import TrainingError
+from chartradar.src.exceptions import TrainingError
 
 
 class DataSplitter:

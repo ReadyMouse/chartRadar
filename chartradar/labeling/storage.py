@@ -11,8 +11,8 @@ from pathlib import Path
 from datetime import datetime
 import hashlib
 
-from chartradar.core.exceptions import LabelingError
-from chartradar.core.types import PatternDetection
+from chartradar.src.exceptions import LabelingError
+from chartradar.src.types import PatternDetection
 
 
 class LabelStorage:

@@ -8,8 +8,8 @@ and detect duplicates or conflicts.
 from typing import Any, Dict, List, Optional
 from datetime import datetime
 
-from chartradar.core.exceptions import LabelValidationError
-from chartradar.core.types import PatternDetection
+from chartradar.src.exceptions import LabelValidationError
+from chartradar.src.types import PatternDetection
 
 
 class LabelValidator:

@@ -8,7 +8,7 @@ from chartradar.metrics.registry import (
     create_algorithm,
 )
 from chartradar.metrics.base import Algorithm
-from chartradar.core.exceptions import AlgorithmNotFoundError
+from chartradar.src.exceptions import AlgorithmNotFoundError
 
 
 class MockAlgorithm(Algorithm):

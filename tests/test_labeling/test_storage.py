@@ -6,7 +6,7 @@ from pathlib import Path
 from datetime import datetime
 
 from chartradar.labeling.storage import LabelStorage
-from chartradar.core.exceptions import LabelingError
+from chartradar.src.exceptions import LabelingError
 
 
 class TestLabelStorage:

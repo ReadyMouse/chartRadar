@@ -10,7 +10,7 @@ import pandas as pd
 from datetime import datetime, timedelta
 
 from chartradar.ingestion.base import DataSource
-from chartradar.core.exceptions import DataSourceError
+from chartradar.src.exceptions import DataSourceError
 
 
 class BatchDataSource(DataSource):

@@ -4,7 +4,7 @@ import pytest
 from datetime import datetime
 
 from chartradar.display.comparator import AlgorithmComparator
-from chartradar.core.types import AlgorithmResult, PatternDetection
+from chartradar.src.types import AlgorithmResult, PatternDetection
 
 
 class TestAlgorithmComparator:

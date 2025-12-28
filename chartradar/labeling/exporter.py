@@ -16,7 +16,7 @@ try:
 except ImportError:
     HDF5_AVAILABLE = False
 
-from chartradar.core.exceptions import LabelingError
+from chartradar.src.exceptions import LabelingError
 from chartradar.training.split import DataSplitter
 
 

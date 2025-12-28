@@ -11,7 +11,7 @@ import inspect
 from pathlib import Path
 
 from chartradar.metrics.base import Algorithm
-from chartradar.core.exceptions import AlgorithmNotFoundError
+from chartradar.src.exceptions import AlgorithmNotFoundError
 
 
 class AlgorithmRegistry:

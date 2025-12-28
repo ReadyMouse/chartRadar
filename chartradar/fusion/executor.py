@@ -10,9 +10,9 @@ from datetime import datetime
 import logging
 
 from chartradar.fusion.base import FusionStrategy
-from chartradar.fusion.registry import FusionStrategyRegistry
-from chartradar.core.types import AlgorithmResult, FusionResult
-from chartradar.core.exceptions import FusionError
+from chartradar.fusion.registry import FusionStrategyRegistry, _default_registry
+from chartradar.src.types import AlgorithmResult, FusionResult
+from chartradar.src.exceptions import FusionError
 
 logger = logging.getLogger(__name__)
 
@@ -30,9 +30,9 @@ class FusionExecutor:
         Initialize the fusion executor.
         
         Args:
-            registry: Fusion strategy registry to use (creates new if None)
+            registry: Fusion strategy registry to use (uses default global registry if None)
         """
-        self.registry = registry or FusionStrategyRegistry()
+        self.registry = registry or _default_registry
     
     def execute(
         self,

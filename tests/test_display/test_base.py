@@ -5,7 +5,7 @@ import pandas as pd
 from datetime import datetime
 
 from chartradar.display.base import Display
-from chartradar.core.exceptions import DisplayError
+from chartradar.src.exceptions import DisplayError
 
 
 class ConcreteDisplay(Display):

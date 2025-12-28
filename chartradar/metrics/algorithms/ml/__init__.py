@@ -9,7 +9,7 @@ from typing import Any, Dict, Optional
 import pandas as pd
 
 from chartradar.metrics.base import Algorithm
-from chartradar.core.exceptions import AlgorithmError
+from chartradar.src.exceptions import AlgorithmError
 
 
 class MLAlgorithm(Algorithm):

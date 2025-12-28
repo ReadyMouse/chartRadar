@@ -10,7 +10,7 @@ import numpy as np
 import logging
 
 from chartradar.training.base import EvaluationLoop
-from chartradar.core.exceptions import EvaluationError
+from chartradar.src.exceptions import EvaluationError
 
 logger = logging.getLogger(__name__)
 

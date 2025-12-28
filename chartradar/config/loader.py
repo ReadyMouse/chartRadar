@@ -11,7 +11,7 @@ from pathlib import Path
 from typing import Any, Dict, List, Optional, Union
 import yaml
 
-from chartradar.core.exceptions import ConfigurationError
+from chartradar.src.exceptions import ConfigurationError
 from chartradar.config.schema import FrameworkConfig
 
 

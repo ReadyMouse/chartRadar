@@ -5,7 +5,7 @@ from pathlib import Path
 from unittest.mock import Mock
 
 from chartradar.training.checkpoint import ModelCheckpointer
-from chartradar.core.exceptions import TrainingError
+from chartradar.src.exceptions import TrainingError
 
 
 class TestModelCheckpointer:

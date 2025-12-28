@@ -24,8 +24,8 @@ try:
 except ImportError:
     PLOTLY_AVAILABLE = False
 
-from chartradar.core.exceptions import DisplayError
-from chartradar.core.types import PatternDetection, AlgorithmResult, FusionResult
+from chartradar.src.exceptions import DisplayError
+from chartradar.src.types import PatternDetection, AlgorithmResult, FusionResult
 
 
 class Visualizer:

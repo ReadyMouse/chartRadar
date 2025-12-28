@@ -10,7 +10,7 @@ import inspect
 from pathlib import Path
 
 from chartradar.fusion.base import FusionStrategy
-from chartradar.core.exceptions import FusionStrategyNotFoundError
+from chartradar.src.exceptions import FusionStrategyNotFoundError
 
 
 class FusionStrategyRegistry:

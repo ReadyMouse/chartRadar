@@ -6,12 +6,12 @@ Based on PRD: `prd-trading-pattern-recognition.md`
 
 ### Core Framework Files
 - `chartradar/__init__.py` - Package initialization and version
-- `chartradar/core/__init__.py` - Core module initialization
-- `chartradar/core/interfaces.py` - Abstract base classes for all module interfaces (DataSource, Algorithm, FusionStrategy, Display) (created)
-- `chartradar/core/exceptions.py` - Custom exception classes for the framework (created)
-- `chartradar/core/logger.py` - Logging configuration and utilities (created)
-- `chartradar/core/types.py` - Type definitions and data models (Pydantic models for standardized outputs) (created)
-- `chartradar/core/pipeline.py` - Main pipeline orchestrator that connects all modules (created)
+- `chartradar/src/__init__.py` - Core module initialization
+- `chartradar/src/interfaces.py` - Abstract base classes for all module interfaces (DataSource, Algorithm, FusionStrategy, Display) (created)
+- `chartradar/src/exceptions.py` - Custom exception classes for the framework (created)
+- `chartradar/src/logger.py` - Logging configuration and utilities (created)
+- `chartradar/src/types.py` - Type definitions and data models (Pydantic models for standardized outputs) (created)
+- `chartradar/src/pipeline.py` - Main pipeline orchestrator that connects all modules (created)
 
 ### Configuration System
 - `chartradar/config/__init__.py` - Config module initialization (created)
@@ -109,19 +109,19 @@ Based on PRD: `prd-trading-pattern-recognition.md`
   - [x] 1.1 Create project directory structure (`chartradar/` package with subdirectories for each module)
   - [x] 1.2 Set up `setup.py` or `pyproject.toml` with package metadata and dependencies
   - [x] 1.3 Create `requirements.txt` and `requirements-dev.txt` with core dependencies (pandas, numpy, PyYAML, pydantic, pytest)
-  - [x] 1.4 Implement `chartradar/core/interfaces.py` with abstract base classes:
+  - [x] 1.4 Implement `chartradar/src/interfaces.py` with abstract base classes:
     - [x] 1.4.1 `DataSource` interface with `load_data()`, `stream_data()`, `get_metadata()` methods
     - [x] 1.4.2 `Algorithm` interface with `process(data)`, `get_metadata()`, `get_requirements()` methods
     - [x] 1.4.3 `FusionStrategy` interface with `fuse(results_list)`, `get_metadata()` methods
     - [x] 1.4.4 `Display` interface with `visualize(results)`, `export(results, format)` methods
-  - [x] 1.5 Create `chartradar/core/exceptions.py` with custom exception classes (ConfigurationError, DataSourceError, AlgorithmError, etc.)
-  - [x] 1.6 Implement `chartradar/core/logger.py` with logging configuration (structured logging, log levels, file/console handlers)
-  - [x] 1.7 Create `chartradar/core/types.py` with Pydantic models for standardized data formats:
+  - [x] 1.5 Create `chartradar/src/exceptions.py` with custom exception classes (ConfigurationError, DataSourceError, AlgorithmError, etc.)
+  - [x] 1.6 Implement `chartradar/src/logger.py` with logging configuration (structured logging, log levels, file/console handlers)
+  - [x] 1.7 Create `chartradar/src/types.py` with Pydantic models for standardized data formats:
     - [x] 1.7.1 `OHLCVData` model for normalized price data
     - [x] 1.7.2 `AlgorithmResult` model for algorithm outputs
     - [x] 1.7.3 `FusionResult` model for fused outputs
     - [x] 1.7.4 `PatternDetection` model for pattern-specific results
-  - [x] 1.8 Implement `chartradar/core/pipeline.py` - main orchestrator that:
+  - [x] 1.8 Implement `chartradar/src/pipeline.py` - main orchestrator that:
     - [x] 1.8.1 Loads configuration from YAML
     - [x] 1.8.2 Initializes data ingestion module
     - [x] 1.8.3 Executes metric module algorithms

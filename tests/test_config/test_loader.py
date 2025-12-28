@@ -6,7 +6,7 @@ from pathlib import Path
 import pytest
 import yaml
 
-from chartradar.core.exceptions import ConfigurationError
+from chartradar.src.exceptions import ConfigurationError
 from chartradar.config.loader import (
     load_yaml_file,
     load_config,

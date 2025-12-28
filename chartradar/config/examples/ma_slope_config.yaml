@@ -1,0 +1,65 @@
+# Moving Average Slope Detector Configuration
+# Demonstrates trend analysis using moving average slopes
+
+version: "1.0"
+name: "MA Slope Trend Analysis"
+
+# Data Sources
+data_sources:
+  - name: "csv_data"
+    type: "csv"
+    enabled: true
+    parameters:
+      path: "data/kraken_BTC_USD_1h.csv"
+      date_column: null  # Date is in the index
+      format: "standard"
+
+# Algorithms
+algorithms:
+  - name: "ma_slope_detector"
+    enabled: true
+    version: "1.0.0"
+    weight: 1.0
+    parameters:
+      # Moving average periods to calculate
+      # Short-term: 10, 20
+      # Medium-term: 50
+      # Long-term: 200
+      ma_periods: [10, 20, 50, 200]
+      
+      # Number of periods to use for slope calculation
+      # Lower = faster response, higher = more stable
+      slope_lookback: 5
+      
+      # Threshold for up/down vs sideways classification
+      # 0.001 = 0.1% change per period
+      slope_threshold: 0.001
+      
+      # Minimum confidence score to report pattern
+      min_confidence: 0.6
+
+# Fusion - not needed for single algorithm but required
+fusion:
+  strategy: "weighted_average"
+  enabled: false
+  parameters:
+    normalize_weights: true
+
+# Display
+display:
+  enabled: true
+  visualization:
+    backend: "matplotlib"
+    show_confidence: true
+    show_patterns: true
+  export:
+    formats: ["json", "csv"]
+    output_dir: "./output"
+    include_metadata: true
+
+# Metadata
+metadata:
+  author: "ChartRadar"
+  description: "MA slope detector configuration for trend analysis"
+  created: "2025-12-28"
+

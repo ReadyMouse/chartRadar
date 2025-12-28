@@ -10,7 +10,7 @@ from pathlib import Path
 
 from chartradar.ingestion.batch import BatchDataSource
 from chartradar.ingestion.normalizer import normalize_dataframe
-from chartradar.core.exceptions import DataSourceError
+from chartradar.src.exceptions import DataSourceError
 
 
 class CSVDataSource(BatchDataSource):

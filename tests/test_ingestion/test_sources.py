@@ -8,7 +8,7 @@ import tempfile
 
 from chartradar.ingestion.sources.csv import CSVDataSource
 from chartradar.ingestion.sources.freqtrade import FreqtradeDataSource
-from chartradar.core.exceptions import DataSourceError
+from chartradar.src.exceptions import DataSourceError
 
 
 class TestCSVDataSource:

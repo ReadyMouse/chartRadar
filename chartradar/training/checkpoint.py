@@ -12,7 +12,7 @@ from pathlib import Path
 from datetime import datetime
 import shutil
 
-from chartradar.core.exceptions import TrainingError
+from chartradar.src.exceptions import TrainingError
 
 
 class ModelCheckpointer:

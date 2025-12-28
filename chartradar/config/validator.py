@@ -6,7 +6,7 @@ including checks for algorithm registry, data source configurations, etc.
 """
 
 from typing import Any, Dict, List, Optional, Set
-from chartradar.core.exceptions import ConfigurationError
+from chartradar.src.exceptions import ConfigurationError
 from chartradar.config.schema import FrameworkConfig, DataSourceConfig, AlgorithmConfig
 
 

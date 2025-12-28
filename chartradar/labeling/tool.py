@@ -11,7 +11,7 @@ from datetime import datetime
 from chartradar.labeling.storage import LabelStorage
 from chartradar.labeling.validator import LabelValidator
 from chartradar.labeling.metadata import LabelMetadata
-from chartradar.core.exceptions import LabelingError
+from chartradar.src.exceptions import LabelingError
 
 
 class LabelingTool:
