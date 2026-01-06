@@ -84,16 +84,6 @@ class EvaluationError(ChartRadarError):
     pass
 
 
-class LabelingError(ChartRadarError):
-    """Raised when there is an error in labeling operations."""
-    pass
-
-
-class LabelValidationError(LabelingError):
-    """Raised when label validation fails."""
-    pass
-
-
 class PipelineError(ChartRadarError):
     """Raised when there is an error in the main pipeline execution."""
     pass

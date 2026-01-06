@@ -12,7 +12,6 @@ ChartRadar is a modular, extensible Python framework for trading pattern recogni
 - **Data Fusion**: Mechanisms to combine outputs from multiple algorithms
 - **Dual Data Modes**: Support for both batch (chunked) and streaming data processing
 - **ML Infrastructure**: Training and testing loops for ML-based algorithms
-- **Data Labeling**: Tools and methods for creating labeled training datasets
 
 ## Available Algorithms
 
@@ -123,8 +122,7 @@ chartradar/
 ├── metrics/        # Algorithm bank and execution engine
 ├── fusion/         # Data fusion strategies
 ├── display/        # Visualization and export
-├── training/       # ML training and testing infrastructure
-└── labeling/       # Data labeling tools
+└── training/       # ML training and testing infrastructure
 ```
 
 ## Configuration
